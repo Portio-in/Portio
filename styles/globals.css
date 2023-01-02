@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Import Font Style */
+/* @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Poppins:wght@400;500;600&display=swap'); */
+
+/* Scrollbar related */
+:root {
+  --primary: rgb(243, 241, 241);
+  --secondary: #66ebd5;
+}
+/* Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 16px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 16px;
+  border: 2.5px solid var(--primary);
+}
