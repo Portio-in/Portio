@@ -1,4 +1,4 @@
-import MenuBarOption from "./menubaroption";
+import MenuBarOption from "./independent/menubar_option";
 import profilePicIcon from "../assets/img/profile-pic-icon.png";
 import uploadResumeIcon from "../assets/img/upload-resume-icon.png";
 import copyPortfolioIcon from "../assets/img/copy-portfolio-link-icon.png";

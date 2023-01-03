@@ -1,5 +1,6 @@
-import MenuBar from "../components/menubar";
+import MenuBar from "../components/menu_bar";
 import Navbar from "../components/navbar";
+import PortfolioTemplateBar from "../components/portfolio_template_bar";
 
 export default function dashbaord() {
     return (
@@ -9,19 +10,8 @@ export default function dashbaord() {
                 <Navbar/>
                 {/* <!-- Menus --> */}
                 <MenuBar />
-                {/* <!-- Choose Portfolio Template --> */}
-                <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Choose Portfolio Template</p>
-                {/* <!-- Templates list --> */}
-                <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
-                    <div class="shrink-0 border-brand border-4 rounded-lg mb-2 p-2">
-                        <img src="./assets/img/template.png" class="w-[60vw] h-auto md:h-[170px] md:w-auto rounded-lg" />
-                        <p class="text-sm md:text-base text-center font-medium px-2 mt-2">Template 1</p>
-                    </div>
-                    <div class="shrink-0 border-2 rounded-lg mb-2 p-2">
-                        <img src="./assets/img/template.png" class="w-[60vw] h-auto md:h-[170px] md:w-auto rounded-lg" />
-                        <p class="text-sm md:text-base text-center font-medium px-2 mt-2">Template 1</p>
-                    </div>
-                </div>
+                {/* Portfolio Template bar */}
+                <PortfolioTemplateBar />
                 {/* <!-- All Projects --> */}
                 <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">All Projects</p>
                 {/* <!-- Projects List --> */}
