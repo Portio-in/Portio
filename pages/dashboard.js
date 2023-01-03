@@ -6,6 +6,7 @@ import ProjectsBar from "../components/projects_bar";
 import EducationBar from "../components/education_bar";
 import CertificationBar from "../components/certification_bar";
 import AchievementBar from "../components/achievement_bar";
+import Footer from "../components/footer";
 
 export default function dashbaord() {
     return (
@@ -27,10 +28,8 @@ export default function dashbaord() {
                 <CertificationBar />
                 {/* <!-- Achievements --> */}
                 <AchievementBar />
-                <div class="mt-12 mb-4">
-                    Created by @Tanmoy741127 with ❤️
-                </div>
-
+                {/* Footer */}
+                <Footer />
             </div>
         </>
     );
