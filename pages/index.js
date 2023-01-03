@@ -47,7 +47,7 @@ function HomePage({loggedIn}) {
         </div>
         <div className="mt-[12vh] md:mt-[14vh] text-center">
             <p className="font-medium">Built by developers | Built for developers</p>
-            <p>created by @Tanmoy741127 with ❤️</p>
+            <p>created by Team Portio with ❤️</p>
         </div>
     </div>
     </>
