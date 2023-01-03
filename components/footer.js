@@ -2,7 +2,7 @@ function Footer() {
     return (
         <>
             <div class="mt-12 mb-4">
-                Created by @Tanmoy741127 with ❤️
+                Created by Team Portio with ❤️
             </div>
         </>
     );
