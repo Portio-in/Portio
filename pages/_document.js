@@ -7,7 +7,6 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
-        <script defer src="https://kit.fontawesome.com/3a3ee716b6.js" crossorigin="anonymous"></script>
       </Head>
       <body>
         <Main />

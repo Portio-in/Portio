@@ -1,3 +1,4 @@
+import SocialLinkBar from "../components/social_link_bar";
 import MenuBar from "../components/menu_bar";
 import Navbar from "../components/navbar";
 import PortfolioTemplateBar from "../components/portfolio_template_bar";
@@ -16,42 +17,7 @@ export default function dashbaord() {
                 {/* Projects */}
                 <ProjectsBar />
                 {/* <!-- Social Links --> */}
-                <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Social Links</p>
-                {/* <!-- Social Links List --> */}
-                <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
-                    <div class="flex flex-col shrink-0 justify-center items-center hover:bg-[#e8e9eb] h-[120px] w-[120px] md:h-[180px] md:w-[180px] border rounded-md mb-2">
-                        <div class="flex justify-center items-center h-[30px] w-[30px] md:h-[50px] md:w-[50px] text-white text-sm md:text-xl bg-brand rounded-full">
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <p class="font-medium px-5 mt-4 md:mt-7 text-sm md:text-base text-center">
-                            Add Link
-                        </p>
-                    </div>
-                    <div class="flex flex-col shrink-0 justify-center items-center hover:bg-[#e8e9eb] h-[120px] w-[120px] md:h-[180px] md:w-[180px] border rounded-md mb-2">
-                        <div class="flex justify-center items-center h-[30px] w-[30px] md:h-[50px] md:w-[50px] text-white text-sm md:text-xl bg-[#CC6B2C] rounded-full">
-                            <i class="fa-solid fa-link"></i>
-                        </div>
-                        <p class="font-medium px-5 mt-4 md:mt-7 text-sm md:text-base text-center">
-                            Website
-                        </p>
-                    </div>
-                    <div class="flex flex-col shrink-0 justify-center items-center hover:bg-[#e8e9eb] h-[120px] w-[120px] md:h-[180px] md:w-[180px] border rounded-md mb-2">
-                        <div class="flex justify-center items-center h-[30px] w-[30px] md:h-[50px] md:w-[50px] text-white text-sm md:text-xl bg-[#1771E6] rounded-full">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </div>
-                        <p class="font-medium px-5 mt-4 md:mt-7 text-sm md:text-base text-center">
-                            Facebook
-                        </p>
-                    </div>
-                    <div class="flex flex-col shrink-0 justify-center items-center hover:bg-[#e8e9eb] h-[120px] w-[120px] md:h-[180px] md:w-[180px] border rounded-md mb-2">
-                        <div class="flex justify-center items-center h-[30px] w-[30px] md:h-[50px] md:w-[50px] text-white text-sm md:text-xl bg-[#22272C] rounded-full">
-                            <i class="fa-brands fa-github"></i>
-                        </div>
-                        <p class="font-medium px-5 mt-4 md:mt-7 text-sm md:text-base text-center">
-                            Github
-                        </p>
-                    </div>
-                </div>
+                <SocialLinkBar />
                 {/* <!-- Education --> */}
                 <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Education</p>
                 <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
