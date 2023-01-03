@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import PortfolioTemplateBar from "../components/portfolio_template_bar";
 import ProjectsBar from "../components/projects_bar";
 import EducationBar from "../components/education_bar";
+import CertificationBar from "../components/certification_bar";
 
 export default function dashbaord() {
     return (
@@ -22,25 +23,7 @@ export default function dashbaord() {
                 {/* <!-- Education --> */}
                 <EducationBar />
                 {/* <!-- Certifications --> */}
-                <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Certifications</p>
-                {/* <!-- Certifications List --> */}
-                <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
-                    <div class="flex flex-row justify-center items-center shrink-0 border rounded-lg mb-2 p-4 hover:bg-[#e8e9eb] w-48">
-                        <div class="flex justify-center items-center h-[50px] w-[50px] text-white text-base md:text-xl bg-brand rounded-full">
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                    </div>
-                    <div class="flex flex-row shrink-0 border rounded-lg mb-2 p-4 hover:bg-[#e8e9eb]">
-                        <div class="flex flex-col gap-y-1 mr-6">
-                            <p class="font-medium text-sm md:text-base">NLP Advanved</p>
-                            <p class="italic text-sm md:text-base">Coursera</p>
-                            <p>01/2021 - 07/2021</p>
-                        </div>
-                        <div class="flex justify-center items-center text-white text-3xl h-auto w-20 bg-brand rounded-lg">
-                            <i class="fa-solid fa-file-contract"></i>
-                        </div>
-                    </div>
-                </div>
+                <CertificationBar />
                 {/* <!-- Achievements --> */}
                 <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Achievements</p>
                 {/* <!-- Achievements List --> */}
