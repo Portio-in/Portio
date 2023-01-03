@@ -1,6 +1,7 @@
 import MenuBar from "../components/menu_bar";
 import Navbar from "../components/navbar";
 import PortfolioTemplateBar from "../components/portfolio_template_bar";
+import ProjectsBar from "../components/projects_bar";
 
 export default function dashbaord() {
     return (
@@ -12,27 +13,8 @@ export default function dashbaord() {
                 <MenuBar />
                 {/* Portfolio Template bar */}
                 <PortfolioTemplateBar />
-                {/* <!-- All Projects --> */}
-                <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">All Projects</p>
-                {/* <!-- Projects List --> */}
-                <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
-                    <div class="flex flex-col shrink-0 justify-center items-center hover:bg-[#e8e9eb] h-auto w-auto border rounded-md mb-2 px-8">
-                        <div class="flex justify-center items-center h-[40px] w-[40px] md:h-[50px] md:w-[50px] text-white text-sm md:text-xl bg-brand rounded-full">
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <p class="font-medium px-5 mt-4 md:mt-7 text-sm md:text-base text-center">
-                            Add Project
-                        </p>
-                    </div>
-                    <div class="shrink-0 border-2 rounded-lg mb-2 p-2">
-                        <img src="./assets/img/template.png" class="w-[60vw] h-auto md:h-[170px] md:w-auto rounded-lg" />
-                        <p class="text-sm md:text-base text-center font-medium px-2 mt-2">Project 1</p>
-                    </div>
-                    <div class="shrink-0 border-2 rounded-lg mb-2 p-2">
-                        <img src="./assets/img/template.png" class="w-[60vw] h-auto md:h-[170px] md:w-auto rounded-lg" />
-                        <p class="text-sm md:text-base text-center font-medium px-2 mt-2">Project 2</p>
-                    </div>
-                </div>
+                {/* Projects */}
+                <ProjectsBar />
                 {/* <!-- Social Links --> */}
                 <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Social Links</p>
                 {/* <!-- Social Links List --> */}
