@@ -5,9 +5,9 @@ function AchievementBar() {
     return (
         <>
             {/* title */}
-            <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Achievements</p>
+            <p className="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Achievements</p>
             {/* <!-- Achievements List --> */}
-            <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
+            <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
                 <AddAchievementRecord />
                 <AchievementRecord />
             </div>

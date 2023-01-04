@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <>
-            <div class="mt-12 mb-4">
+            <div className="mt-12 mb-4">
                 Created by Team Portio with ❤️
             </div>
         </>

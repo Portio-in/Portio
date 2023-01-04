@@ -7,9 +7,9 @@ function SocialLinkBar() {
     return (
         <>
             {/* title */}
-            <p class="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Social Links</p>
+            <p className="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Social Links</p>
             {/* <!-- Social Links List --> */}
-            <div class="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
+            <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
                 <AddSocialLinkOption />
                 <SocialLinkOption icon={faLink} label="Website" color="#CC6B2C" />
                 <SocialLinkOption icon={faFacebookF} label="Facebook" color="#1771E6" />

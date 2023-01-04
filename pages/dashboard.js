@@ -11,7 +11,7 @@ import Footer from "../components/footer";
 export default function dashbaord() {
     return (
         <>
-            <div class="p-4 md:px-8 md:py-2 overflow-x-hidden">
+            <div className="p-4 md:px-8 md:py-2 overflow-x-hidden">
                 {/* Navbar  */}
                 <Navbar/>
                 {/* <!-- Menus --> */}

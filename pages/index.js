@@ -3,7 +3,7 @@ import logo from "../assets/img/logo.png";
 import googleIcon from "../assets/img/google-icon.png";
 import githubIcon from "../assets/img/github-icon.png";
 import buildIcon from "../assets/img/build-icon.png";
-import OAuthButton from "../components/oauth_btn";
+import OAuthButton from "../components/independent/oauth_btn";
 import { GITHUB_OAUTH_URL, GOOGLE_OAUTH_URL } from "../config";
 import { useEffect } from "react";
 import { getCookies} from 'cookies-next';
