@@ -1,10 +1,10 @@
 import { faFileContract } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function CertificationRecord({ }) {
+function CertificationRecord({ onClick }) {
     return (
         <>
-            <div className="flex flex-row shrink-0 border rounded-lg mb-2 p-4 hover:bg-[#e8e9eb] cursor-pointer">
+            <div className="flex flex-row shrink-0 border rounded-lg mb-2 p-4 hover:bg-[#e8e9eb] cursor-pointer" onClick={onClick}>
                 <div className="flex flex-col gap-y-1 mr-6">
                     <p className="font-medium text-sm md:text-base">NLP Advanved</p>
                     <p className="italic text-sm md:text-base">Coursera</p>
