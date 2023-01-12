@@ -1,9 +1,9 @@
 import PortfolioOption from "./independent/portfolio_option";
-import DashboardController from "../controllers/dashboard_controller";
+import GlobalController from "../controllers/controller";
 import {useEffect, useState} from "react";
 
 function PortfolioTemplateBar() {
-    const controller = DashboardController.getInstance();
+    const controller = GlobalController.getInstance();
 
     const [templates, setTemplates] = useState([]);
 
