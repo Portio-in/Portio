@@ -15,7 +15,7 @@ export default function dashbaord({token}) {
     useEffect(()=>{
         const controller = GlobalController.getInstance();
         controller.apiClient.setToken(token);
-    }, [token]);
+    }, []);
     return (
         <>
             <div className="p-4 md:px-8 md:py-2 overflow-x-hidden">

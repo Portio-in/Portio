@@ -29,6 +29,12 @@ class ApiClient{
                 data: null
             }
         }
+        while (true){
+            if(!route.startsWith("/available") && ApiClient.#token === ""){
+                await new Promise((resolve) => setTimeout(resolve, 10));
+                console.log("Waiting for token");
+            }else break;
+        }
         const config = {
             method: method.toLowerCase(),
             url: `${BASE_API_URL}${route}`,
