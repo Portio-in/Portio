@@ -41,11 +41,11 @@ export default function EditDeleteChoiceModal({ isOpen, onClickCloseModal, onCli
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
                                         {/* Edit */}
-                                        <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent bg-blue-200 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ambbg-blue-500 focus-visible:ring-offset-2 mb-4">
+                                        <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent bg-blue-200 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ambbg-blue-500 focus-visible:ring-offset-2 mb-4" onClick={onClickEdit}>
                                             <FontAwesomeIcon icon={faPenToSquare} className="mr-6" /> {editLabel}
                                         </button>
                                         {/* Delete */}
-                                        <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent bg-red-200 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2">
+                                        <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent bg-red-200 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2" onClick={onClickDelete}>
                                             <FontAwesomeIcon icon={faTrash} className="mr-6" /> {deleteLabel}
                                         </button>
                                     </div>

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import AchievementRecord from "./independent/achievement_record";
 import AddAchievementsRecordModal from "./independent/add_achievements_record_modal";
 import AddAchievementRecord from "./independent/add_achievement_record";
@@ -8,6 +8,7 @@ import GlobalController from "../controllers/controller";
 function AchievementBar() {
     const controller = GlobalController.getInstance().achievementController;
     const [achievements, setAchievements] = useState([]);
+    const currentRecord = useRef(null);
     let [isOpenNewAchievementModal, setIsOpenNewAchievementModal] = useState(false)
     let [isOpenEditDeleteLinkModal, setIsOpenEditDeleteLinkModal] = useState(false)
 
@@ -16,6 +17,15 @@ function AchievementBar() {
             if (res.success) {
                 setAchievements([...achievements, res.record])
                 setIsOpenNewAchievementModal(false);
+            }
+        })
+    }
+
+    const deleteAchievement = (record) => {
+        controller.delete(record).then((res) => {
+            if (res) {
+                setAchievements(achievements.filter((e) => e.id !== record.id))
+                setIsOpenEditDeleteLinkModal(false);
             }
         })
     }
@@ -35,8 +45,18 @@ function AchievementBar() {
             {/* <!-- Achievements List --> */}
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
                 <AddAchievementRecord onClick={()=>setIsOpenNewAchievementModal(true)} />
-                {achievements.map((ele)=> <AchievementRecord record={ele} key={ele.id} onClick={()=>setIsOpenEditDeleteLinkModal(true)} />)}
-                {/*<AchievementRecord onClick={()=>setIsOpenEditDeleteLinkModal(true)} />*/}
+                {
+                    achievements.map((ele)=>
+                        <AchievementRecord
+                            record={ele}
+                            key={ele.id}
+                            onClick={()=>{
+                                currentRecord.current = ele;
+                                setIsOpenEditDeleteLinkModal(true);
+                            }}
+                        />
+                    )
+                }
             </div>
 
             {/* Add Achievement Record */}
@@ -48,7 +68,9 @@ function AchievementBar() {
                 editLabel="Edit Achievement  Details"
                 deleteLabel="Delete Achievement Record"
                 onClickEdit={()=>{}}
-                onClickDelete={()=>{}}
+                onClickDelete={()=>{
+                    deleteAchievement(currentRecord.current);
+                }}
             />       
         </>
     );
