@@ -1,7 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import {Fragment, useRef} from 'react'
+import Achievement from "../../models/achievement";
 
 export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+    const achievementRef = useRef(Achievement.empty());
 
     return (
         <>
@@ -43,17 +45,19 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                             <span className="text-gray-700">Title <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Hackodisha 2.0"
+                                                onChange={(e)=> {achievementRef.current.title = e.target.value}}
                                             />
                                         </label>
-                                        {/* Enter provider */}
+                                        {/* Enter description */}
                                         <label className="block mb-4">
                                             <span className="text-gray-700">Description <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. NITR"
+                                                onChange={(e)=> {achievementRef.current.description = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter link */}
@@ -61,8 +65,9 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                             <span className="text-gray-700">Certificate / Reference Link <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. B.Tech CSE"
+                                                onChange={(e)=> {achievementRef.current.referenceLink = e.target.value}}
                                             />
                                         </label>
                                         <div className='flex flex-col md:flex-row gap-4 mb-6'>
@@ -71,8 +76,9 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                                 <span className="text-gray-700">Achieved on<span className='text-red-700'>*</span></span>
                                                 <input
                                                     type="date"
-                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    onChange={(e)=> {achievementRef.current.setDate(e.target.value)}}
                                                 />
                                             </label>
                                         </div>
@@ -81,7 +87,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={onClickSave}
+                                            onClick={()=>onClickSave(achievementRef.current)}
                                         >
                                         Submit Details
                                         </button>

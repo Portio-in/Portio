@@ -20,7 +20,6 @@ class AchievementController{
         if(res.success) {
             return res.data.map((e)=>Achievement.fromJson(e));
         }else {
-            console.log("Available choice template AchievementController : "+res.message)
             return [];
         }
     }
@@ -30,7 +29,6 @@ class AchievementController{
         if(res.success) {
             return Achievement.fromJson(res.data);
         }else {
-            console.log("Available choice template AchievementController : "+res.message)
             return null;
         }
     }
@@ -46,7 +44,6 @@ class AchievementController{
                 record: Achievement.fromJson(res.data)
             };
         }else {
-            console.log("AchievementController : "+res.message)
             return {
                 success: false,
                 record: null
@@ -62,7 +59,6 @@ class AchievementController{
                 record: Achievement.fromJson(res.data)
             };
         }else {
-            console.log("AchievementController : "+res.message)
             return {
                 success: false,
                 record: null
@@ -75,7 +71,6 @@ class AchievementController{
         if(res.success) {
             return true;
         }else {
-            console.log("AchievementController : "+res.message)
             return false;
         }
     }

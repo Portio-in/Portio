@@ -1,18 +1,19 @@
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
-function AchievementRecord({onClick}) {
+function AchievementRecord({onClick, record}) {
     return (
         <>
             <div className="flex flex-row shrink-0 border rounded-lg mb-2 p-4 hover:bg-[#e8e9eb] cursor-pointer" onClick={onClick}>
                 <div className="flex flex-col gap-y-1 mr-6">
-                    <p className="font-medium text-sm md:text-base">Hackodisha 2.0 Winner</p>
-                    <p className="italic text-sm md:text-base">by NITR</p>
-                    <p>01/2021 - 07/2021</p>
+                    <p className="font-medium text-sm md:text-base">{record.title}</p>
+                    <p className="italic text-sm md:text-base">{record.description}</p>
+                    <p>{record.date}</p>
                 </div>
-                <div className="flex justify-center items-center text-white text-3xl h-auto w-20 bg-brand rounded-lg">
+                <Link href={record.referenceLink} target="_blank" className="flex justify-center items-center text-white text-3xl h-auto w-20 bg-brand rounded-lg">
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare}/>
-                </div>
+                </Link>
             </div>
         </>
     );

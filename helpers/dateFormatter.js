@@ -8,9 +8,9 @@ function formatDate(date) {
 }
 
 function formattedDateToTZFormat(date) {
-    if (date == null || data === undefined || data === "") return "";
-    let parts = data.split('-');
-    let mydate = new Date(parts[0], parts[1] - 1, parts[2]);
+    if (date == null || date === undefined || date === "") return "";
+    let parts = date.split('-');
+    let mydate = new Date(new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]), 0,0,0)+60);
     return mydate.toISOString();
 }
 

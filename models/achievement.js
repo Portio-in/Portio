@@ -10,7 +10,7 @@ class Achievement{
         this.date = date;
     }
     static fromJson(json){
-        return new Certificate({
+        return new Achievement({
             id: json.id,
             title: json.title,
             description: json.description ? json.description : "",
@@ -24,7 +24,7 @@ class Achievement{
             id: this.id,
             title: this.title,
             description: this.description,
-            referenceLink: this.referenceLink,
+            reference_link: this.referenceLink,
             date: formattedDateToTZFormat(this.date)
         }
     }
@@ -37,8 +37,24 @@ class Achievement{
         return this.referenceLink === undefined || this.referenceLink === null
     }
 
+
+    setDate(date){
+        let splitted = date.split("-");
+        this.date = `${splitted[2]}-${splitted[1]}-${splitted[0]}`
+    }
+
     validate(){
         return this.isDescriptionBlank() && this.isReferenceLinkBlank() && isBlank(this.title);
+    }
+
+    static empty(){
+        return new Achievement({
+            id: null,
+            title: "",
+            description: "",
+            referenceLink: "",
+            date: formatDate(new Date())
+        })
     }
 }
 
