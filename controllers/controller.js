@@ -2,6 +2,7 @@ import AvailableChoiceController from "./available_choice";
 import ApiClient from "./api_client";
 import AchievementController from "./achievement";
 import CertificateController from  "./certificate";
+import EducationController from "./education";
 
 class GlobalController{
     /** @type {GlobalController} */
@@ -14,6 +15,7 @@ class GlobalController{
         this.availableChoicesController = new AvailableChoiceController(this.apiClient);
         this.achievementController = new AchievementController(this.apiClient);
         this.certificateController = new CertificateController(this.apiClient);
+        this.educationController = new EducationController(this.apiClient);
     }
 
     static getInstance() {

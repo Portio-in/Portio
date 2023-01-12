@@ -30,12 +30,12 @@ class Education{
         if(e === "") e = null;
         return {
             id: this.id,
-            courseName: this.courseName,
-            institutionName: this.institutionName,
+            course_name: this.courseName,
+            institution_name: this.institutionName,
             score: this.score,
             subjects: this.subjects,
-            startingDate: formattedDateToTZFormat(this.startingDate),
-            endingDate: e
+            starting_date: formattedDateToTZFormat(this.startingDate),
+            ending_date: e
         }
     }
 
@@ -50,8 +50,39 @@ class Education{
         }
     }
 
+    setStartingDate(date){
+        let splitted = date.split("-");
+        this.startingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`;
+    }
+
+    setEndingDate(date){
+        try {
+            let splitted = date.split("-");
+            this.endingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`;
+        }catch (e) {
+            this.endingDate = "";
+        }
+    }
+
+    getEndingDate(){
+        if(this.endingDate === null || this.endingDate === undefined || this.endingDate === "") return "Present";
+        return this.endingDate;
+    }
+
     validate(){
         return isBlank(this.courseName) && isBlank(this.institutionName) && isBlank(this.startingDate);
+    }
+
+    static empty(){
+        return new Education({
+            id: null,
+            courseName: "",
+            institutionName: "",
+            score: "",
+            subjects: [],
+            startingDate: null,
+            endingDate: null
+        })
     }
 }
 

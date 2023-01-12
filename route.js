@@ -11,5 +11,10 @@ module.exports = {
     "FETCH_CERTIFICATE_ROUTE": "/certificate",
     "CREATE_CERTIFICATE_ROUTE": "/certificate",
     "UPDATE_CERTIFICATE_ROUTE": "/certificate",
-    "DELETE_CERTIFICATE_ROUTE": "/certificate"
+    "DELETE_CERTIFICATE_ROUTE": "/certificate",
+    "FETCH_ALL_EDUCATIONS_ROUTE": "/education/all",
+    "FETCH_EDUCATION_ROUTE": "/education",
+    "CREATE_EDUCATION_ROUTE": "/education",
+    "UPDATE_EDUCATION_ROUTE": "/education",
+    "DELETE_EDUCATION_ROUTE": "/education"
 }

@@ -1,9 +1,11 @@
 import { faFaceAngry } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import {Fragment, useRef} from 'react'
+import Education from "../../models/education";
 
 export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+    const educationRef = useRef(Education.empty());
 
     return (
         <>
@@ -47,6 +49,7 @@ export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onC
                                                 type="text"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. ABC College"
+                                                onChange={(e)=> {educationRef.current.institutionName = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter course name */}
@@ -56,15 +59,17 @@ export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onC
                                                 type="text"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. B.Tech CSE"
+                                                onChange={(e)=> {educationRef.current.courseName = e.target.value}}
                                             />
                                         </label>
-                                        {/* Enter course name */}
+                                        {/* Enter subjects name */}
                                         <label className="block mb-4">
                                             <span className="text-gray-700">Subjects [Seperated by comma]</span>
                                             <input
                                                 type="text"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Java, Computer Architecture"
+                                                onChange={(e)=> {educationRef.current.subjects = e.target.value.split(",")}}
                                             />
                                         </label>
                                         {/* Enter score */}
@@ -74,6 +79,7 @@ export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onC
                                                 type="text"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. CGPA 10, 90%"
+                                                onChange={(e)=> {educationRef.current.score = e.target.value}}
                                             />
                                         </label>
                                         <div className='flex flex-col md:flex-row gap-4 mb-6'>
@@ -84,6 +90,7 @@ export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onC
                                                     type="date"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    onChange={(e)=> {educationRef.current.setStartingDate(e.target.value)}}
                                                 />
                                             </label>     
                                             {/* Enter ending date */}
@@ -95,6 +102,7 @@ export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onC
                                                     type="date"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    onChange={(e)=> {educationRef.current.setEndingDate(e.target.value)}}
                                                 />
                                             </label>     
                                         </div>
@@ -105,7 +113,7 @@ export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onC
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={onClickSave}
+                                            onClick={()=>onClickSave(educationRef.current)}
                                         >
                                         Submit Details
                                         </button>
