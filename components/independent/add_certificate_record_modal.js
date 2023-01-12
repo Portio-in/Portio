@@ -72,7 +72,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                         </label>
                                         {/* Enter completed on */}
                                         <label className="block mb-4">
-                                            <span className="text-gray-700">Completed On</span>
+                                            <span className="text-gray-700">Completed On <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="date"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
