@@ -23,9 +23,9 @@ class Certificate{
         return {
             id: this.id,
             title: this.title,
-            providedBy: this.providedBy,
+            provided_by: this.providedBy,
             link: this.link,
-            completedOn: formattedDateToTZFormat(this.completedOn)
+            completed_on: formattedDateToTZFormat(this.completedOn)
         }
     }
 
@@ -39,6 +39,21 @@ class Certificate{
 
     validate(){
         return this.isLinkBlank() && this.isProvidedByBlank() && isBlank(this.title);
+    }
+
+    setCompletedOnDate(date){
+        let splitted = date.split("-");
+        this.completedOn = `${splitted[2]}-${splitted[1]}-${splitted[0]}`
+    }
+
+    static empty(){
+        return new Certificate({
+            id: null,
+            title: "",
+            providedBy: "",
+            link: "",
+            completedOn: null
+        })
     }
 }
 

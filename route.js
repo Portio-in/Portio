@@ -6,5 +6,10 @@ module.exports = {
     "FETCH_ACHIEVEMENT_ROUTE": "/achievement",
     "CREATE_ACHIEVEMENT_ROUTE": "/achievement",
     "UPDATE_ACHIEVEMENT_ROUTE": "/achievement",
-    "DELETE_ACHIEVEMENT_ROUTE": "/achievement"
+    "DELETE_ACHIEVEMENT_ROUTE": "/achievement",
+    "FETCH_ALL_CERTIFICATES_ROUTE": "/certificate/all",
+    "FETCH_CERTIFICATE_ROUTE": "/certificate",
+    "CREATE_CERTIFICATE_ROUTE": "/certificate",
+    "UPDATE_CERTIFICATE_ROUTE": "/certificate",
+    "DELETE_CERTIFICATE_ROUTE": "/certificate"
 }
