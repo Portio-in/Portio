@@ -8,7 +8,13 @@ const nextConfig = {
         hostname: 'i.ytimg.com',
         port: '',
         pathname: '/**',
-      },    
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.tacdn.com',
+        port: '',
+        pathname: '/**',
+      },
     ]
   }
 }

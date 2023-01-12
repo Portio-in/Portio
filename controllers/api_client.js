@@ -4,12 +4,14 @@ import {BASE_API_URL} from  "../config";
 
 class ApiClient{
     static instance = null;
+    /** @type {axios} */
     static axiosClient = null;
     static #token = "";
-    constructor() {
-        if(ApiClient.instance != null) return ApiClient.instance;
-        ApiClient.instance = this;
+    static getInstance() {
+        if(ApiClient.instance !== null) return ApiClient.instance;
         ApiClient.axiosClient = axios;
+        ApiClient.instance = new ApiClient();
+        return  ApiClient.instance;
     }
 
     setToken(token){
@@ -54,4 +56,4 @@ class ApiClient{
 
 }
 
-export default ApiClient;
+module.exports =  ApiClient;
