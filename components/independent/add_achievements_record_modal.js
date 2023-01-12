@@ -49,7 +49,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                         </label>
                                         {/* Enter provider */}
                                         <label className="block mb-4">
-                                            <span className="text-gray-700">Organized by <span className='text-red-700'>*</span></span>
+                                            <span className="text-gray-700">Description <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -68,22 +68,13 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                         <div className='flex flex-col md:flex-row gap-4 mb-6'>
                                             {/* Enter starting date */}
                                             <label className="block w-full">
-                                                <span className="text-gray-700">Starting Date <span className='text-red-700'>*</span></span>
+                                                <span className="text-gray-700">Achieved on<span className='text-red-700'>*</span></span>
                                                 <input
                                                     type="date"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
                                                 />
-                                            </label>     
-                                            {/* Enter ending date */}
-                                            <label className="block w-full">
-                                                <span className="text-gray-700">Ending Date <span className='text-red-700'>*</span></span>
-                                                <input
-                                                    type="date"
-                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                    placeholder="i.e. 01-01-2010"
-                                                />
-                                            </label>     
+                                            </label>
                                         </div>
                                     </div>
                                     <div className="mt-4">
