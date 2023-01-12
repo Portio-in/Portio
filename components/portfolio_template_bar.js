@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 
 function PortfolioTemplateBar() {
     const controller = GlobalController.getInstance();
-
     const [templates, setTemplates] = useState([]);
 
     useEffect(()=>{

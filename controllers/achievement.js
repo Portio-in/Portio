@@ -1,43 +1,84 @@
-import { FETCH_AVAILABLE_TEMPLATE_ROUTE, FETCH_AVAILABLE_TECHSTACKS_ROUTE, FETCH_AVAILABLE_SOCIAL_LINK_TYPES_ROUTE } from "../route"
-import PortfolioTemplate from "../models/portfolio_template";
-import TechStackType from "../models/techstack_type";
-import SocialLink from "../models/social_link";
+import {
+    FETCH_ACHIEVEMENT_ROUTE,
+    FETCH_ALL_ACHIEVEMENTS_ROUTE,
+    UPDATE_ACHIEVEMENT_ROUTE,
+    DELETE_ACHIEVEMENT_ROUTE,
+    CREATE_ACHIEVEMENT_ROUTE
+} from "../route"
+import Achievement from "../models/achievement";
 
 // TODO error
-class AvailableChoiceController{
+class AchievementController{
 
     constructor(apiClient) {
         /** @type {ApiClient} */
         this.apiClient = apiClient;
     }
-    async fetch_templates(){
-        console.log("fetching templates");
-        const res = await this.apiClient.request('GET', FETCH_AVAILABLE_TEMPLATE_ROUTE);
+
+    async fetch_all(){
+        const res = await this.apiClient.request('GET', FETCH_ALL_ACHIEVEMENTS_ROUTE);
         if(res.success) {
-            return res.data.map((e)=>PortfolioTemplate.fromJson(e));
+            return res.data.map((e)=>Achievement.fromJson(e));
         }else {
-            console.log("Available choice template Controller : "+res.message)
+            console.log("Available choice template AchievementController : "+res.message)
             return [];
         }
     }
-    async fetch_techStacks(){
-        const res = await this.apiClient.request('GET', FETCH_AVAILABLE_TECHSTACKS_ROUTE);
+
+    async fetch(id){
+        const res = await this.apiClient.request('GET', FETCH_ACHIEVEMENT_ROUTE+"/"+id);
         if(res.success) {
-            return res.data.map((e)=>TechStackType.fromJson(e));
+            return Achievement.fromJson(res.data);
         }else {
-            console.log("Available choice tech stack Controller : "+res.message)
-            return [];
+            console.log("Available choice template AchievementController : "+res.message)
+            return null;
         }
     }
-    async fetch_socialLinkTypes(){
-        const res = await this.apiClient.request('GET', FETCH_AVAILABLE_SOCIAL_LINK_TYPES_ROUTE);
+
+    /**
+     * @param {Achievement} record
+     * */
+    async update(record){
+        const res = await this.apiClient.request('PUT', UPDATE_ACHIEVEMENT_ROUTE+"/"+record.id, record.toJson());
         if(res.success) {
-            return res.data.map((e)=>SocialLink.fromJson(e));
+            return {
+                success: true,
+                record: Achievement.fromJson(res.data)
+            };
         }else {
-            console.log("Available choice social link Controller : "+res.message)
-            return [];
+            console.log("AchievementController : "+res.message)
+            return {
+                success: false,
+                record: null
+            };
+        }
+    }
+
+    async create(record){
+        const res = await this.apiClient.request('POST', CREATE_ACHIEVEMENT_ROUTE, record.toJson());
+        if(res.success) {
+            return {
+                success: true,
+                record: Achievement.fromJson(res.data)
+            };
+        }else {
+            console.log("AchievementController : "+res.message)
+            return {
+                success: false,
+                record: null
+            };
+        }
+    }
+
+    async delete(record){
+        const res = await this.apiClient.request('DELETE', DELETE_ACHIEVEMENT_ROUTE+"/"+record.id, record.toJson());
+        if(res.success) {
+            return true;
+        }else {
+            console.log("AchievementController : "+res.message)
+            return false;
         }
     }
 }
 
-module.exports = AvailableChoiceController;
+module.exports = AchievementController;

@@ -1,0 +1,8 @@
+ -> {}-----
+fetch_all -> list<e>
+fetch(id) -> e | null
+update -> {success : boolean, record : e | null}
+create -> {success : boolean, record : e | null}
+delete -> true . false
+-----
+
