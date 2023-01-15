@@ -21,6 +21,11 @@ class SocialType{
         }
     }
 
+    getTitle(){
+        if(this.type === "") return "";
+        return this.type.charAt(0).toUpperCase() + this.type.slice(1);
+    }
+
     static empty(){
         return new SocialType({
             id: 0,

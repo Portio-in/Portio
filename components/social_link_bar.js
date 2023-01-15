@@ -51,7 +51,7 @@ function SocialLinkBar() {
                 {
                     socialLinks.map((ele)=>
                         <SocialLinkOption
-                            label={ele.type.type}
+                            label={ele.type.getTitle()}
                             icon={ele.type.type === "facebook" ? faFacebookF :
                                 ele.type.type === "github" ? faGithub : faLink}
                             color={
@@ -66,9 +66,6 @@ function SocialLinkBar() {
                         />
                     )
                 }
-                {/*<SocialLinkOption onClick={()=>editSocialLink()} icon={faLink} label="Website" color="#CC6B2C" />*/}
-                {/*<SocialLinkOption icon={faFacebookF} label="Facebook" color="#1771E6" />*/}
-                {/*<SocialLinkOption icon={faGithub} label="Github" color="#22272C" />*/}
             </div>
             {/* Add  Social link modal */}
             <AddSocialLinkModal isOpen={isOpenNewLinkModal} onClickCloseModal={()=>setIsOpenNewLinkModal(false)} onClickSave={(e)=>{submitNewSocialLink(e)}} />
