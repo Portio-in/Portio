@@ -2,6 +2,7 @@ import { FETCH_AVAILABLE_TEMPLATE_ROUTE, FETCH_AVAILABLE_TECHSTACKS_ROUTE, FETCH
 import PortfolioTemplate from "../models/portfolio_template";
 import TechStackType from "../models/techstack_type";
 import SocialLink from "../models/social_link";
+import SocialType from "../models/social_type";
 
 // TODO error
 class AvailableChoiceController{
@@ -32,9 +33,9 @@ class AvailableChoiceController{
     async fetch_socialLinkTypes(){
         const res = await this.apiClient.request('GET', FETCH_AVAILABLE_SOCIAL_LINK_TYPES_ROUTE);
         if(res.success) {
-            return res.data.map((e)=>SocialLink.fromJson(e));
+            return res.data.map((e)=>SocialType.fromJson(e));
         }else {
-            console.log("Available choice social link Controller : "+res.message)
+            console.log("Available choice social type Controller : "+res.message)
             return [];
         }
     }

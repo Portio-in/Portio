@@ -20,8 +20,17 @@ class SocialLink{
         return {
             id: this.id,
             link: this.link,
-            type: this.type.toJson()
+            type: this.type.toJson(),
+            type_id: this.type.id
         }
+    }
+
+    static empty(){
+        return new SocialLink({
+            id: 0,
+            link: "",
+            type: SocialType.empty()
+        })
     }
 }
 

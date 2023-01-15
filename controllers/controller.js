@@ -3,6 +3,7 @@ import ApiClient from "./api_client";
 import AchievementController from "./achievement";
 import CertificateController from  "./certificate";
 import EducationController from "./education";
+import SocialLinkController from "./social_link";
 
 class GlobalController{
     /** @type {GlobalController} */
@@ -16,6 +17,7 @@ class GlobalController{
         this.achievementController = new AchievementController(this.apiClient);
         this.certificateController = new CertificateController(this.apiClient);
         this.educationController = new EducationController(this.apiClient);
+        this.socialLinkController = new SocialLinkController(this.apiClient);
     }
 
     static getInstance() {

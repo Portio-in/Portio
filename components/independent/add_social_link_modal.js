@@ -1,9 +1,21 @@
-import { faFaceAngry } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import {Fragment, useEffect, useRef, useState} from 'react'
+import GlobalController from "../../controllers/controller";
+import SocialLink from "../../models/social_link";
+import social_link from "../../models/social_link";
 
-export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickSave, providers }) {
+export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickSave }) {
+    const controller = GlobalController.getInstance().availableChoicesController;
+    /** @type {[]SocialType} */
+    const [socialTypes, setSocialTypes] = useState([]);
+    const socialRef = useRef(SocialLink.empty());
+
+    useEffect(()=>{
+        controller.fetch_socialLinkTypes().then((types)=>{
+            setSocialTypes(types);
+            socialRef.current.type = types[0];
+        });
+    }, []);
 
     return (
         <>
@@ -44,10 +56,17 @@ export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickS
                                         <label className="block">
                                             <span className="text-gray-700">Select Provider</span>
                                             <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                            >
-                                                {providers.map((provider) =>
-                                                    <option key={provider.name}><p><FontAwesomeIcon icon={faFaceAngry} />  {provider.name}</p></option>
-                                                )}
+                                                    onChange={(e)=>{
+                                                        socialRef.current.type = socialTypes[e.target.value];
+                                                    }}
+                                            >{
+                                                socialTypes.map((type, index)=>{
+                                                    return (
+                                                        <option value={index}>{type.type}</option>
+                                                    )
+                                                })
+                                            }
+
                                             </select>
                                         </label>
                                         {/* Enter link */}
@@ -55,8 +74,9 @@ export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickS
                                             <span className="text-gray-700">Provide a valid URL</span>
                                             <input
                                                 type="url"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                placeholder="htttps://example.com"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                placeholder="https://example.com"
+                                                onChange={(e)=>{socialRef.current.link = e.target.value}}
                                             />
                                         </label>
                                     </div>
@@ -65,7 +85,7 @@ export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickS
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={onClickSave}
+                                            onClick={()=>onClickSave(socialRef.current)}
                                         >
                                         Submit Details
                                         </button>

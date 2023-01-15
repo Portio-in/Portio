@@ -20,6 +20,15 @@ class SocialType{
             icon: this.icon
         }
     }
+
+    static empty(){
+        return new SocialType({
+            id: 0,
+            type: "",
+            icon: ""
+        })
+    }
+
 }
 
 export default SocialType;

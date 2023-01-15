@@ -16,5 +16,10 @@ module.exports = {
     "FETCH_EDUCATION_ROUTE": "/education",
     "CREATE_EDUCATION_ROUTE": "/education",
     "UPDATE_EDUCATION_ROUTE": "/education",
-    "DELETE_EDUCATION_ROUTE": "/education"
+    "DELETE_EDUCATION_ROUTE": "/education",
+    "FETCH_ALL_SOCIAL_LINKS_ROUTE": "/link/all",
+    "FETCH_SOCIAL_LINK_ROUTE": "/link",
+    "CREATE_SOCIAL_LINK_ROUTE": "/link",
+    "UPDATE_SOCIAL_LINK_ROUTE": "/link",
+    "DELETE_SOCIAL_LINK_ROUTE": "/link",
 }
