@@ -51,6 +51,7 @@ function SocialLinkBar() {
                 {
                     socialLinks.map((ele)=>
                         <SocialLinkOption
+                            key={ele.id}
                             label={ele.type.getTitle()}
                             icon={ele.type.type === "facebook" ? faFacebookF :
                                 ele.type.type === "github" ? faGithub : faLink}

@@ -1,7 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import {Fragment, useRef} from 'react'
 
 export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSave }) {
+    useRef()
 
     return (
         <>

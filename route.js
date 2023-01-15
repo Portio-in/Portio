@@ -22,4 +22,8 @@ module.exports = {
     "CREATE_SOCIAL_LINK_ROUTE": "/link",
     "UPDATE_SOCIAL_LINK_ROUTE": "/link",
     "DELETE_SOCIAL_LINK_ROUTE": "/link",
+    "FETCH_PROFILE_ROUTE": "/profile",
+    "UPDATE_PROFILE_ROUTE": "/profile",
+    "UPDATE_DOMAIN_ROUTE": "/profile/domain",
+    "UPDATE_PORTFOLIO_TEMPLATE_ROUTE": "/profile/template"
 }

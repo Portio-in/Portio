@@ -62,7 +62,7 @@ export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickS
                                             >{
                                                 socialTypes.map((type, index)=>{
                                                     return (
-                                                        <option value={index}>{type.type}</option>
+                                                        <option key={type.id} value={index}>{type.type}</option>
                                                     )
                                                 })
                                             }
