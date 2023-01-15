@@ -1,5 +1,5 @@
 import TechStackType from "./techstack_type";
-import {Template} from "next/dist/compiled/webpack/webpack";
+import PortfolioTemplate from "./portfolio_template";
 
 class Profile{
     constructor({id, name, email, phone, avatar, tagline, description, techStacks, activeTemplate}) {
@@ -25,7 +25,7 @@ class Profile{
             tagline: "",
             description: json.description,
             techStacks: json.techStacks.map((e)=>TechStackType.fromJson(e)),
-            activeTemplate: Template.fromJson(json.activeTemplate)
+            activeTemplate: PortfolioTemplate.fromJson(json.activeTemplate)
         })
     }
 
