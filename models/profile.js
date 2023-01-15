@@ -1,7 +1,8 @@
 import TechStackType from "./techstack_type";
+import {Template} from "next/dist/compiled/webpack/webpack";
 
 class Profile{
-    constructor({id, name, email, phone, avatar, tagline, description, techStacks}) {
+    constructor({id, name, email, phone, avatar, tagline, description, techStacks, activeTemplate}) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -10,8 +11,10 @@ class Profile{
         this.tagline = tagline;
         this.description = description;
         this.techStacks = techStacks;
+        this.activeTemplate = activeTemplate;
     }
 
+    // TODO update tagline
     static fromJson(json){
         return new Profile({
             id: json.id,
@@ -19,9 +22,10 @@ class Profile{
             email: json.email,
             phone: json.phone,
             avatar: json.avatar,
-            tagline: json.tagline,
+            tagline: "",
             description: json.description,
-            techStacks: json.techStacks.map((e)=>TechStackType.fromJson(e))
+            techStacks: json.techStacks.map((e)=>TechStackType.fromJson(e)),
+            activeTemplate: Template.fromJson(json.activeTemplate)
         })
     }
 
@@ -34,11 +38,13 @@ class Profile{
             avatar: this.avatar,
             tagline: this.tagline,
             description: this.description,
-            techStacks: this.techStacks.map((e)=>e.toJson())
+            techStacks: this.techStacks.map((e)=>e.toJson()),
+            activeTemplate: this.activeTemplate.toJson()
         };
         if(forUpdate){
             delete data.email;
             delete data.techStacks;
+            delete data.activeTemplate;
         }
         return data;
     }

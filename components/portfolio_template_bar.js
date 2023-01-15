@@ -8,10 +8,10 @@ function PortfolioTemplateBar() {
 
     useEffect(()=>{
         controller.availableChoicesController.fetch_templates().then((templates)=>{
+            console.log(templates);
             setTemplates(templates);
         });
     }, []);
-
 
     return (
         <>
@@ -20,10 +20,12 @@ function PortfolioTemplateBar() {
             {/* <!-- Templates list --> */}
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
                 {
-                    templates.map((e)=><PortfolioOption template={e} key={e.id}/>)
+                    templates.map((e)=><PortfolioOption active={e.id === "clcxhn1630000qtjs7h12ra2d"} template={e} key={e.id} onClick={()=>{}}/>)
                 }
             </div>
         </>);
 }
 
 export default PortfolioTemplateBar;
+
+// profile.activeTemplate.id
