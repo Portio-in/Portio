@@ -12,12 +12,10 @@ class AvailableChoiceController{
         this.apiClient = apiClient;
     }
     async fetch_templates(){
-        console.log("fetching templates");
         const res = await this.apiClient.request('GET', FETCH_AVAILABLE_TEMPLATE_ROUTE);
         if(res.success) {
             return res.data.map((e)=>PortfolioTemplate.fromJson(e));
         }else {
-            console.log("Available choice template Controller : "+res.message)
             return [];
         }
     }
@@ -26,7 +24,6 @@ class AvailableChoiceController{
         if(res.success) {
             return res.data.map((e)=>TechStackType.fromJson(e));
         }else {
-            console.log("Available choice tech stack Controller : "+res.message)
             return [];
         }
     }
@@ -35,7 +32,6 @@ class AvailableChoiceController{
         if(res.success) {
             return res.data.map((e)=>SocialType.fromJson(e));
         }else {
-            console.log("Available choice social type Controller : "+res.message)
             return [];
         }
     }

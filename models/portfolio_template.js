@@ -29,6 +29,15 @@ class PortfolioTemplate{
             githubLink: this.githubLink
         }
     }
+
+    static empty(){
+        return new PortfolioTemplate({
+            id: null,
+            code: "",
+            name: "",
+            previewimg: ""
+        })
+    }
 }
 
 export default PortfolioTemplate;

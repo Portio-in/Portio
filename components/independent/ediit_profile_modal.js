@@ -1,8 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useRef} from 'react'
+import {Fragment, useEffect, useRef} from 'react'
+import Profile from "../../models/profile"
 
-export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSave }) {
-    useRef()
+export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal, onClickUpdate }) {
+    const currProfRef = useRef(Profile.copy(profileRef.current));
+    currProfRef.current = Profile.copy(profileRef.current);
+
+    useEffect(()=>{
+    }, []);
 
     return (
         <>
@@ -44,8 +49,10 @@ export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSav
                                             <span className="text-gray-700">Name <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder=""
+                                                defaultValue={currProfRef.current.name}
+                                                onChange={(e)=> {currProfRef.current.name = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter email */}
@@ -53,9 +60,11 @@ export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSav
                                             <span className="text-gray-700">Email</span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500"
                                                 placeholder=""
                                                 disabled
+                                                defaultValue={currProfRef.current.email}
+                                                onChange={(e)=> {currProfRef.current.email = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter phone */}
@@ -63,8 +72,10 @@ export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSav
                                             <span className="text-gray-700">Phone No <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder=""
+                                                defaultValue={currProfRef.current.phone}
+                                                onChange={(e)=> {currProfRef.current.phone = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter description */}
@@ -72,8 +83,10 @@ export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSav
                                             <span className="text-gray-700">Description <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder=""
+                                                defaultValue={currProfRef.current.description}
+                                                onChange={(e)=> {currProfRef.current.description = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter tagline */}
@@ -81,8 +94,10 @@ export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSav
                                             <span className="text-gray-700">Tagline <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder=""
+                                                defaultValue={currProfRef.current.tagline}
+                                                onChange={(e)=> {currProfRef.current.tagline = e.target.value}}
                                             />
                                         </label>
                                     </div>
@@ -91,7 +106,7 @@ export default function EditProfileModal({ isOpen, onClickCloseModal, onClickSav
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={onClickSave}
+                                            onClick={()=>onClickUpdate(currProfRef.current)}
                                         >
                                         Update Profile
                                         </button>

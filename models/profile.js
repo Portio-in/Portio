@@ -2,10 +2,11 @@ import TechStackType from "./techstack_type";
 import PortfolioTemplate from "./portfolio_template";
 
 class Profile{
-    constructor({id, name, email, phone, avatar, tagline, description, techStacks, activeTemplate}) {
+    constructor({id, name, email, domain, phone, avatar, tagline, description, techStacks, activeTemplate}) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.domain = domain;
         this.phone = phone;
         this.avatar = avatar;
         this.tagline = tagline;
@@ -20,6 +21,7 @@ class Profile{
             id: json.id,
             name: json.name,
             email: json.email,
+            domain: json.domain,
             phone: json.phone,
             avatar: json.avatar,
             tagline: "",
@@ -34,6 +36,7 @@ class Profile{
             id: this.id,
             name: this.name,
             email: this.email,
+            domain: this.domain,
             phone: this.phone,
             avatar: this.avatar,
             tagline: this.tagline,
@@ -47,6 +50,28 @@ class Profile{
             delete data.activeTemplate;
         }
         return data;
+    }
+
+    static empty(){
+        return new Profile({
+            id: -1,
+            name: "",
+            email: "",
+            domain: "",
+            phone: "",
+            avatar: "",
+            tagline: "",
+            description: "",
+            techStacks: [],
+            activeTemplate: PortfolioTemplate.empty()
+        });
+    }
+
+    /**
+     * @return {Profile}
+     * */
+    static copy(profile){
+        return Profile.fromJson(profile.toJson({forUpdate: false}));
     }
 }
 

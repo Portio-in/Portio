@@ -1,7 +1,6 @@
 import PortfolioOption from "./independent/portfolio_option";
 import GlobalController from "../controllers/controller";
 import {useEffect, useState} from "react";
-import profile from "../models/profile";
 
 function PortfolioTemplateBar() {
     const controller = GlobalController.getInstance();
@@ -14,7 +13,6 @@ function PortfolioTemplateBar() {
         });
         GlobalController.fetchProfile()
             .then((profile)=>{
-                // todo
                 setActiveTemplateID(profile.activeTemplate.id)
             })
     }, []);

@@ -1,7 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import {Fragment, useEffect, useRef} from 'react'
+import Profile from "../../models/profile";
 
-export default function DomainConfigureModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function DomainConfigureModal({ isOpen, onClickCloseModal, onClickUpdate, profileRef }) {
+
+    const newprofileRef = useRef(Profile.copy(profileRef.current));
+    newprofileRef.current = Profile.copy(profileRef.current);
 
     return (
         <>
@@ -43,8 +47,10 @@ export default function DomainConfigureModal({ isOpen, onClickCloseModal, onClic
                                             <span className="text-gray-700">Domain Name <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. ABC College"
+                                                defaultValue={newprofileRef.current.domain}
+                                                onChange={(e)=> {newprofileRef.current.domain = e.target.value}}
                                             />
                                         </label>
                                     </div>
@@ -53,7 +59,7 @@ export default function DomainConfigureModal({ isOpen, onClickCloseModal, onClic
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={onClickSave}
+                                            onClick={()=>onClickUpdate(newprofileRef.current)}
                                         >
                                         Update Now
                                         </button>
