@@ -5,8 +5,8 @@ import CertificateController from  "./certificate";
 import EducationController from "./education";
 import SocialLinkController from "./social_link";
 import ProfileController from "./profile";
+import ProjectController from "./project";
 
-import Profile from "../models/profile";
 
 class GlobalController{
     /** @type {GlobalController} */
@@ -23,6 +23,7 @@ class GlobalController{
         this.educationController = new EducationController(this.apiClient);
         this.socialLinkController = new SocialLinkController(this.apiClient);
         this.profileController = new ProfileController(this.apiClient);
+        this.projectController = new ProjectController(this.apiClient);
     }
 
     static async fetchProfile(ignore_cache = false){

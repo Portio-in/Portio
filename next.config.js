@@ -15,6 +15,18 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'www.tgsin.in',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: "https",
+        hostname: "personalprojectts.s3.ap-south-1.amazonaws.com",
+        port: "",
+        pathname: '/**',
+      }
     ]
   }
 }

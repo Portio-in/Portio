@@ -16,6 +16,16 @@ class Project{
         this.endingDate = endingDate;
     }
 
+    setStartingDate(date){
+        let splitted = date.split("-");
+        this.startingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`
+    }
+
+    setEndingDate(date){
+        let splitted = date.split("-");
+        this.endingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`
+    }
+
     static fromJson(json){
         return new Project({
             id: json.id,
@@ -38,16 +48,33 @@ class Project{
         return {
             id: this.id,
             title: this.title,
-            coverImage: this.coverImage,
+            cover_image: this.coverImage,
             images: this.images,
             description: this.description,
-            techStacks: this.techStacks.map(t => t.toJson()),
-            liveLink: this.liveLink,
-            codeLink: this.codeLink,
-            readMoreLink: this.readMoreLink,
-            startingDate: formattedDateToTZFormat(this.startingDate),
-            endingDate: e
+            tech_stacks_id: this.techStacks.map(t => t.id),
+            tech_stacks: this.techStacks.map(t => t.toJson()),
+            live_link: this.liveLink,
+            code_link: this.codeLink,
+            read_more_link: this.readMoreLink,
+            starting_date: formattedDateToTZFormat(this.startingDate),
+            ending_date: e
         }
+    }
+
+    static empty(){
+        return new Project({
+            id: null,
+            title: "",
+            coverImage: "",
+            images: [],
+            description: "",
+            techStacks: [],
+            liveLink: "",
+            codeLink: "",
+            readMoreLink: "",
+            startingDate: "",
+            endingDate: ""
+        })
     }
 }
 

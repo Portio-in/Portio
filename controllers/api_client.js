@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_API_URL} from  "../config";
+import {BASE_API_URL, BASE_FILE_MANAGEMENT_URL} from  "../config";
 
 
 class ApiClient{
@@ -59,6 +59,68 @@ class ApiClient{
         }
     }
 
+
+    async uploadFiles(files){
+        let data = new FormData();
+        for(let file of files){
+            data.append('files', file);
+        }
+        const config = {
+            method: 'post',
+            url: `${BASE_FILE_MANAGEMENT_URL}/upload`,
+            headers: {
+                'Authorization': ApiClient.#token
+            },
+            data : data
+        }
+        try{
+            let res = await ApiClient.axiosClient(config);
+            let data = res.data;
+            let files = data.files;
+            if(files === undefined || files === null || files.length === 0) {
+                throw new Error("Upload failed");
+            }
+            return {
+                success: true,
+                links: files
+            };
+        }catch (e) {
+            return {
+                success: false,
+                links: []
+            }
+        }
+    }
+
+    async uploadFile(file){
+        let data = new FormData();
+        data.append('files', file);
+        const config = {
+            method: 'post',
+            url: `${BASE_FILE_MANAGEMENT_URL}/upload`,
+            headers: {
+                'Authorization': ApiClient.#token
+            },
+            data : data
+        }
+        try{
+            let res = await ApiClient.axiosClient(config);
+            let data = res.data;
+            let files = data.files;
+            if(files === undefined || files === null || files.length === 0) {
+                throw new Error("Upload failed");
+            }
+            return {
+                success: true,
+                link: files[0]
+            };
+        }catch (e) {
+            return {
+                success: false,
+                link: ""
+            }
+        }
+    }
 }
 
 module.exports =  ApiClient;

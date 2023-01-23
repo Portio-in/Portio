@@ -25,5 +25,10 @@ module.exports = {
     "FETCH_PROFILE_ROUTE": "/profile",
     "UPDATE_PROFILE_ROUTE": "/profile",
     "UPDATE_DOMAIN_ROUTE": "/profile/domain",
-    "UPDATE_PORTFOLIO_TEMPLATE_ROUTE": "/profile/template"
+    "UPDATE_PORTFOLIO_TEMPLATE_ROUTE": "/profile/template",
+    "FETCH_ALL_PROJECTS_ROUTE": "/project/all",
+    "FETCH_PROJECT_ROUTE": "/project",
+    "CREATE_PROJECT_ROUTE": "/project",
+    "UPDATE_PROJECT_ROUTE": "/project",
+    "DELETE_PROJECT_ROUTE": "/project",
 }
