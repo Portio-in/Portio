@@ -6,7 +6,7 @@ import {Fragment, useEffect, useRef, useState} from 'react'
 import Project from "../../models/project";
 import GlobalController from "../../controllers/controller";
 
-export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditProjectRecordModal({ isOpen, isEdit, currentProjectRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const [isLoading, setIsLoading] = useState(false);
     const projectRef = useRef(Project.empty());
     /** @type {TechStackType[]} */
@@ -19,17 +19,24 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
     const [coverImageUrl, setCoverImageUrl] = useState("");
 
     useEffect(()=>{
-        if(isOpen){
+        if(isEdit){
+            projectRef.current = currentProjectRef.current;
+            setSelectedTechStacks([...projectRef.current.techStacks]);
+            setSelectedImages([...projectRef.current.images]);
+            setCoverImageUrl(projectRef.current.coverImage);
+        }else {
             projectRef.current = Project.empty();
+            setSelectedTechStacks([]);
+            setSelectedImages([]);
+        }
+        if(isOpen){
             async function fetchChoices() {
                 const choices = await GlobalController.getInstance().availableChoicesController.fetch_techStacks();
                 setAvailableChoices(choices);
             }
             fetchChoices();
-            setSelectedTechStacks([]);
-            setSelectedImages([]);
         }
-    }, [isOpen])
+    }, [isOpen, isEdit])
 
     function selectTechStack(techStackId) {
         if(techStackId === null || techStackId === undefined || techStackId === "") return;
@@ -121,6 +128,8 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Project XYZ"
+                                                defaultValue={isEdit ? currentProjectRef.current.title : projectRef.current.title}
+
                                                 onChange={(e)=> {projectRef.current.title = e.target.value}}
                                             />
                                         </label>
@@ -130,6 +139,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                             <textarea
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="Enter description here..."
+                                                defaultValue={isEdit ? currentProjectRef.current.description : projectRef.current.description}
                                                 onChange={(e)=> {projectRef.current.description = e.target.value}}
                                             />
                                         </label>
@@ -197,6 +207,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                defaultValue={isEdit ? currentProjectRef.current.liveLink : projectRef.current.liveLink}
                                                 onChange={(e)=> {projectRef.current.liveLink = e.target.value}}
                                             />
                                         </label>                                        
@@ -206,6 +217,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                defaultValue={isEdit ? currentProjectRef.current.sourceCodeLink : projectRef.current.sourceCodeLink}
                                                 onChange={(e)=> {projectRef.current.sourceCodeLink = e.target.value}}
                                             />
                                         </label>                                        
@@ -215,6 +227,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                defaultValue={isEdit ? currentProjectRef.current.readMoreLink : projectRef.current.readMoreLink}
                                                 onChange={(e)=> {projectRef.current.readMoreLink = e.target.value}}
                                             />
                                         </label>
@@ -226,6 +239,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                                     type="date"
                                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    defaultValue={isEdit ? currentProjectRef.current.getStartingDate() : projectRef.current.getStartingDate()}
                                                     onChange={(e)=> {projectRef.current.setStartingDate(e.target.value)}}
                                                 />
                                             </label>     
@@ -237,6 +251,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
                                                     id="project_ending_date"
+                                                    defaultValue={isEdit ? currentProjectRef.current.getEndingDate() : projectRef.current.getEndingDate()}
                                                     onChange={(e)=> {projectRef.current.setEndingDate(e.target.value)}}
                                                 />
                                             </label>     
@@ -246,7 +261,7 @@ export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, o
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={()=>onClickSave(projectRef.current)}
+                                            onClick={()=> isEdit ? onClickEdit(projectRef.current) : onClickSave(projectRef.current)}
                                         >
                                         Submit Details
                                         </button>

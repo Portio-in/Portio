@@ -2,20 +2,24 @@ import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useEffect, useRef, useState} from 'react'
 import GlobalController from "../../controllers/controller";
 import SocialLink from "../../models/social_link";
-import social_link from "../../models/social_link";
 
-export default function AddEditSocialLinkModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditSocialLinkModal({ isOpen, isEdit, currentSocialLinkRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const controller = GlobalController.getInstance().availableChoicesController;
     /** @type {[]SocialType} */
     const [socialTypes, setSocialTypes] = useState([]);
     const socialRef = useRef(SocialLink.empty());
 
     useEffect(()=>{
+        if(isEdit){
+            socialRef.current = currentSocialLinkRef.current;
+        }else {
+            socialRef.current = SocialLink.empty();
+        }
         controller.fetch_socialLinkTypes().then((types)=>{
             setSocialTypes(types);
             socialRef.current.type = types[0];
         });
-    }, []);
+    }, [isOpen, isEdit]);
 
     return (
         <>
@@ -49,7 +53,7 @@ export default function AddEditSocialLinkModal({ isOpen, onClickCloseModal, onCl
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Add Social Link
+                                        {isEdit ? "Edit" : "Add"} Social Link
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
                                         {/* Select provider */}
@@ -59,6 +63,7 @@ export default function AddEditSocialLinkModal({ isOpen, onClickCloseModal, onCl
                                                     onChange={(e)=>{
                                                         socialRef.current.type = socialTypes[e.target.value];
                                                     }}
+                                                    defaultValue={isEdit ? currentSocialLinkRef.current.type : socialRef.current.type}
                                             >{
                                                 socialTypes.map((type, index)=>{
                                                     return (
@@ -76,6 +81,7 @@ export default function AddEditSocialLinkModal({ isOpen, onClickCloseModal, onCl
                                                 type="url"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="https://example.com"
+                                                defaultValue={isEdit ? currentSocialLinkRef.current.link : socialRef.current.link}
                                                 onChange={(e)=>{socialRef.current.link = e.target.value}}
                                             />
                                         </label>
@@ -85,7 +91,7 @@ export default function AddEditSocialLinkModal({ isOpen, onClickCloseModal, onCl
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={()=>onClickSave(socialRef.current)}
+                                            onClick={()=> isEdit ? onClickEdit(socialRef.current) :  onClickSave(socialRef.current)}
                                         >
                                         Submit Details
                                         </button>

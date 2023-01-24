@@ -22,6 +22,7 @@ class Project{
     }
 
     getStartingDate(){
+        if (this.startingDate === null || this.startingDate === undefined || this.startingDate === "") return null;
         let splitted = this.startingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];
@@ -38,7 +39,7 @@ class Project{
     }
 
     getEndingDate(){
-        if(this.endingDate === null || this.endingDate === undefined) return null;
+        if(this.endingDate === null || this.endingDate === undefined || this.endingDate === "") return null;
         let splitted = this.endingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];

@@ -1,12 +1,16 @@
-import { faFaceAngry } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useRef} from 'react'
+import {Fragment, useEffect, useRef} from 'react'
 import Education from "../../models/education";
 
-export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditEducationRecordModal({ isOpen, isEdit, currentEducationRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const educationRef = useRef(Education.empty());
-
+    useEffect(()=>{
+        if(isEdit){
+            educationRef.current = currentEducationRef.current;
+        }else {
+            educationRef.current = Education.empty();
+        }
+    },[isOpen, isEdit])
     return (
         <>
             <Transition show={isOpen} as={Fragment}>
@@ -39,7 +43,7 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Add Education Record
+                                        {isEdit ? "Edit" : "Add"} Education Record
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
                                         {/* Enter institution name */}
@@ -47,8 +51,9 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                             <span className="text-gray-700">Institution/Board Name <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. ABC College"
+                                                defaultValue={isEdit ? currentEducationRef.current.institutionName : educationRef.current.institutionName}
                                                 onChange={(e)=> {educationRef.current.institutionName = e.target.value}}
                                             />
                                         </label>
@@ -57,8 +62,9 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                             <span className="text-gray-700">Course Name <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. B.Tech CSE"
+                                                defaultValue={isEdit ? currentEducationRef.current.courseName : educationRef.current.courseName}
                                                 onChange={(e)=> {educationRef.current.courseName = e.target.value}}
                                             />
                                         </label>
@@ -67,8 +73,9 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                             <span className="text-gray-700">Subjects [Seperated by comma]</span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Java, Computer Architecture"
+                                                defaultValue={isEdit ? currentEducationRef.current.subjects.join(",") : educationRef.current.subjects.join(",")}
                                                 onChange={(e)=> {educationRef.current.subjects = e.target.value.split(",")}}
                                             />
                                         </label>
@@ -77,8 +84,9 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                             <span className="text-gray-700">Score <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. CGPA 10, 90%"
+                                                defaultValue={isEdit ? currentEducationRef.current.score : educationRef.current.score}
                                                 onChange={(e)=> {educationRef.current.score = e.target.value}}
                                             />
                                         </label>
@@ -88,8 +96,9 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                                 <span className="text-gray-700">Starting Date <span className='text-red-700'>*</span></span>
                                                 <input
                                                     type="date"
-                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    defaultValue={isEdit ? currentEducationRef.current.getStartingDate() : educationRef.current.getStartingDate()}
                                                     onChange={(e)=> {educationRef.current.setStartingDate(e.target.value)}}
                                                 />
                                             </label>     
@@ -100,8 +109,9 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                                 </span>
                                                 <input
                                                     type="date"
-                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    defaultValue={isEdit ? currentEducationRef.current.getEndingDate() : educationRef.current.getEndingDate()}
                                                     onChange={(e)=> {educationRef.current.setEndingDate(e.target.value)}}
                                                 />
                                             </label>     
@@ -113,7 +123,7 @@ export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal,
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={()=>onClickSave(educationRef.current)}
+                                            onClick={()=> isEdit ? onClickEdit(educationRef.current) : onClickSave(educationRef.current)}
                                         >
                                         Submit Details
                                         </button>

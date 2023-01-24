@@ -9,14 +9,29 @@ function EducationBar() {
     const controller = GlobalController.getInstance().educationController;
     const [education, setEducation] = useState([]);
     const currentRecord = useRef(null);
-    const [isAddEducationModalOpen, setIsAddEducationModalOpen] = useState(false);
+    const [isOpenNewEducationModal, setIsOpenNewEducationModal] = useState(false);
+    let [isEditEducationModal, setIsEditEducationModal] = useState(false)
     const [isOpenEditDeleteLinkModal, setIsOpenEditDeleteLinkModal] = useState(false)
 
     const submitNewEducation = (record) => {
         controller.create(record).then((res) => {
             if (res.success) {
                 setEducation([...education, res.record])
-                setIsAddEducationModalOpen(false);
+                setIsOpenNewEducationModal(false);
+            }
+        })
+    }
+
+    const editEducation = (record) => {
+        controller.update(record).then((res) => {
+            if (res.success) {
+                setEducation(education.map((e) => {
+                    if (e.id === record.id) {
+                        return record;
+                    }
+                    return e;
+                }))
+                setIsOpenNewEducationModal(false);
             }
         })
     }
@@ -40,7 +55,10 @@ function EducationBar() {
         <>
             <p className="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Education</p>
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
-                <AddEducationRecord onClick={()=>setIsAddEducationModalOpen(true)} />
+                <AddEducationRecord onClick={()=>{
+                    setIsEditEducationModal(false);
+                    setTimeout(()=>setIsOpenNewEducationModal(true), 100);
+                }} />
                 {
                     education.map((ele)=>
                         <EducationRecord
@@ -53,18 +71,30 @@ function EducationBar() {
                         />
                     )
                 }
-                {/*<EducationRecord onClick={()=>setIsOpenEditDeleteLinkModal(true)} />               */}
             </div>
 
             {/* Modal to add education record */}
-            <AddEditEducationRecordModal isOpen={isAddEducationModalOpen} onClickSave={(e)=>{submitNewEducation(e)}} onClickCloseModal={()=>setIsAddEducationModalOpen(false)} />
+            <AddEditEducationRecordModal
+                isOpen={isOpenNewEducationModal}
+                isEdit={isEditEducationModal}
+                currentEducationRef={currentRecord}
+                onClickCloseModal={()=>setIsOpenNewEducationModal(false)}
+                onClickSave={(e)=>submitNewEducation(e)}
+                onClickEdit={(e)=>editEducation(e)}
+            />
             {/* Edit Social link modal */}
             <EditDeleteChoiceModal
                 isOpen={isOpenEditDeleteLinkModal} 
                 onClickCloseModal={()=>setIsOpenEditDeleteLinkModal(false)} 
                 editLabel="Edit Education Record"
                 deleteLabel="Delete Education Record"
-                onClickEdit={()=>{}}
+                onClickEdit={()=>{
+                    setIsEditEducationModal(true);
+                    setTimeout(()=>{
+                        setIsOpenNewEducationModal(true);
+                        setIsOpenEditDeleteLinkModal(false);
+                    }, 100);
+                }}
                 onClickDelete={()=>{deleteEducation(currentRecord.current);}}
             />
         </>

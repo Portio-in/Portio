@@ -26,6 +26,8 @@ class Education{
     }
 
     toJson(){
+        let s = formattedDateToTZFormat(this.startingDate);
+        if(s === "") s = null;
         let e = formattedDateToTZFormat(this.endingDate);
         if(e === "") e = null;
         return {
@@ -34,7 +36,7 @@ class Education{
             institution_name: this.institutionName,
             score: this.score,
             subjects: this.subjects,
-            starting_date: formattedDateToTZFormat(this.startingDate),
+            starting_date: s,
             ending_date: e
         }
     }
@@ -56,6 +58,7 @@ class Education{
     }
 
     getStartingDate(){
+        if (this.startingDate === null || this.startingDate === undefined || this.startingDate === "") return null;
         let splitted = this.startingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];

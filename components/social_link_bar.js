@@ -9,20 +9,31 @@ import {faLink} from "@fortawesome/free-solid-svg-icons";
 
 function SocialLinkBar() {
     const controller = GlobalController.getInstance().socialLinkController;
-    const [socialLinks, setSocialLinks] = useState([]);
+    const [socialLink, setSocialLink] = useState([]);
     const currentRecord = useRef(null);
-    let [isOpenNewLinkModal, setIsOpenNewLinkModal] = useState(false)
+    let [isOpenNewSocialLinkModal, setIsOpenNewSocialLinkModal] = useState(false)
+    let [isEditSocialLinkModal, setIsEditSocialLinkModal] = useState(false)
     let [isOpenEditDeleteLinkModal, setIsOpenEditDeleteLinkModal] = useState(false)
 
-    function editSocialLink() {
-        setIsOpenEditDeleteLinkModal(true)
+    const editSocialLink = (record) => {
+        controller.update(record).then((res) => {
+            if (res.success) {
+                setSocialLink(socialLink.map((e) => {
+                    if (e.id === record.id) {
+                        return record;
+                    }
+                    return e;
+                }))
+                setIsOpenNewSocialLinkModal(false);
+            }
+        })
     }
 
     const submitNewSocialLink = (record) => {
         controller.create(record).then((res) => {
             if (res.success) {
-                setSocialLinks([...socialLinks, res.record])
-                setIsOpenNewLinkModal(false);
+                setSocialLink([...socialLink, res.record])
+                setIsOpenNewSocialLinkModal(false);
             }
         })
     }
@@ -30,14 +41,15 @@ function SocialLinkBar() {
     const deleteSocialLink = (record) => {
         controller.delete(record).then((res) => {
             if (res) {
-                setSocialLinks(socialLinks.filter((e) => e.id !== record.id))
+                setSocialLink(socialLink.filter((e) => e.id !== record.id))
                 setIsOpenEditDeleteLinkModal(false);
             }
         })
     }
+
     useEffect(()=>{
         controller.fetch_all().then((records)=>{
-            setSocialLinks(records);
+            setSocialLink(records);
         });
     }, []);
 
@@ -47,9 +59,12 @@ function SocialLinkBar() {
             <p className="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Social Links</p>
             {/* <!-- Social Links List --> */}
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto">
-                <AddSocialLinkOption onClick={()=>setIsOpenNewLinkModal(true)} />
+                <AddSocialLinkOption onClick={()=> {
+                    setIsEditSocialLinkModal(false);
+                    setTimeout(()=>setIsOpenNewSocialLinkModal(true), 100);
+                }} />
                 {
-                    socialLinks.map((ele)=>
+                    socialLink.map((ele)=>
                         <SocialLinkOption
                             key={ele.id}
                             label={ele.type.getTitle()}
@@ -69,14 +84,26 @@ function SocialLinkBar() {
                 }
             </div>
             {/* Add  Social link modal */}
-            <AddEditSocialLinkModal isOpen={isOpenNewLinkModal} onClickCloseModal={()=>setIsOpenNewLinkModal(false)} onClickSave={(e)=>{submitNewSocialLink(e)}} />
+            <AddEditSocialLinkModal
+                isOpen={isOpenNewSocialLinkModal}
+                isEdit={isEditSocialLinkModal}
+                currentSocialLinkRef={currentRecord}
+                onClickCloseModal={()=>setIsOpenNewSocialLinkModal(false)}
+                onClickSave={(e)=>submitNewSocialLink(e)}
+                onClickEdit={(e)=>editSocialLink(e)} />
             {/* Edit Social link modal */}
             <EditDeleteChoiceModal 
                 isOpen={isOpenEditDeleteLinkModal} 
                 onClickCloseModal={()=>setIsOpenEditDeleteLinkModal(false)} 
                 editLabel="Edit Social Link"
                 deleteLabel="Delete Social Link"
-                onClickEdit={()=>{}}
+                onClickEdit={()=>{
+                    setIsEditSocialLinkModal(true);
+                    setTimeout(()=>{
+                        setIsOpenNewSocialLinkModal(true);
+                        setIsOpenEditDeleteLinkModal(false);
+                    }, 100);
+                }}
                 onClickDelete={(e)=>{
                     deleteSocialLink(currentRecord.current)
                 }}
