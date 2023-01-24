@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useEffect, useRef} from 'react'
 import Achievement from "../../models/achievement";
 
-export default function AddAchievementsRecordModal({ isOpen, isEdit, currentAchievementRef, onClickCloseModal, onClickSave, onClickEdit }) {
+export default function AddEditAchievementsRecordModal({ isOpen, isEdit, currentAchievementRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const achievementRef = useRef(Achievement.empty());
 
     useEffect(()=>{
@@ -45,7 +45,7 @@ export default function AddAchievementsRecordModal({ isOpen, isEdit, currentAchi
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Add Achievement Record
+                                        {isEdit ? "Edit Achievement Record" : "Add Achievement Record"}
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
                                         {/* Enter title */}

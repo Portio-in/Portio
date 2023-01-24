@@ -1,6 +1,6 @@
 import { faFacebookF, faGithub } from "@fortawesome/free-brands-svg-icons";
 import {useEffect, useRef, useState} from "react";
-import AddSocialLinkModal from "./independent/add_social_link_modal";
+import AddEditSocialLinkModal from "./independent/add_edit_social_link_modal";
 import AddSocialLinkOption from "./independent/add_social_link_option";
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
 import SocialLinkOption from "./independent/social_link_option";
@@ -69,7 +69,7 @@ function SocialLinkBar() {
                 }
             </div>
             {/* Add  Social link modal */}
-            <AddSocialLinkModal isOpen={isOpenNewLinkModal} onClickCloseModal={()=>setIsOpenNewLinkModal(false)} onClickSave={(e)=>{submitNewSocialLink(e)}} />
+            <AddEditSocialLinkModal isOpen={isOpenNewLinkModal} onClickCloseModal={()=>setIsOpenNewLinkModal(false)} onClickSave={(e)=>{submitNewSocialLink(e)}} />
             {/* Edit Social link modal */}
             <EditDeleteChoiceModal 
                 isOpen={isOpenEditDeleteLinkModal} 

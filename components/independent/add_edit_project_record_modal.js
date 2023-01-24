@@ -6,7 +6,7 @@ import {Fragment, useEffect, useRef, useState} from 'react'
 import Project from "../../models/project";
 import GlobalController from "../../controllers/controller";
 
-export default function AddProjectRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditProjectRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
     const [isLoading, setIsLoading] = useState(false);
     const projectRef = useRef(Project.empty());
     /** @type {TechStackType[]} */

@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useRef} from 'react'
 import Education from "../../models/education";
 
-export default function AddEducationRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditEducationRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
     const educationRef = useRef(Education.empty());
 
     return (

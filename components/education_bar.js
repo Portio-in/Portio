@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import AddEducationRecord from "./independent/add_education_record";
-import AddEducationRecordModal from "./independent/add_education_record_modal";
+import AddEditEducationRecordModal from "./independent/add_edit_education_record_modal";
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
 import EducationRecord from "./independent/education_record";
 import GlobalController from "../controllers/controller";
@@ -57,7 +57,7 @@ function EducationBar() {
             </div>
 
             {/* Modal to add education record */}
-            <AddEducationRecordModal isOpen={isAddEducationModalOpen} onClickSave={(e)=>{submitNewEducation(e)}} onClickCloseModal={()=>setIsAddEducationModalOpen(false)} />
+            <AddEditEducationRecordModal isOpen={isAddEducationModalOpen} onClickSave={(e)=>{submitNewEducation(e)}} onClickCloseModal={()=>setIsAddEducationModalOpen(false)} />
             {/* Edit Social link modal */}
             <EditDeleteChoiceModal
                 isOpen={isOpenEditDeleteLinkModal} 

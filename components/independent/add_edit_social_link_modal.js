@@ -4,7 +4,7 @@ import GlobalController from "../../controllers/controller";
 import SocialLink from "../../models/social_link";
 import social_link from "../../models/social_link";
 
-export default function AddSocialLinkModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditSocialLinkModal({ isOpen, onClickCloseModal, onClickSave }) {
     const controller = GlobalController.getInstance().availableChoicesController;
     /** @type {[]SocialType} */
     const [socialTypes, setSocialTypes] = useState([]);

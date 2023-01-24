@@ -47,6 +47,7 @@ class Certificate{
     }
 
     getCompletedOnDate(){
+        if(this.completedOn === null) return null;
         let splitted = this.completedOn.split("-");
         let year = splitted[2];
         let month = splitted[1];

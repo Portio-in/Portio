@@ -31,4 +31,9 @@ module.exports = {
     "CREATE_PROJECT_ROUTE": "/project",
     "UPDATE_PROJECT_ROUTE": "/project",
     "DELETE_PROJECT_ROUTE": "/project",
+    "FETCH_EXPERIENCE_ROUTE": "/experience",
+    "FETCH_ALL_EXPERIENCE_ROUTE": "/experience/all",
+    "UPDATE_EXPERIENCE_ROUTE": "/experience",
+    "DELETE_EXPERIENCE_ROUTE": "/experience",
+    "CREATE_EXPERIENCE_ROUTE": "/experience"
 }

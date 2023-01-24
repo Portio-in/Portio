@@ -1,9 +1,17 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useRef} from 'react'
+import {Fragment, useEffect, useRef} from 'react'
 import Certificate from "../../models/certificate";
 
-export default function AddCertificationRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditCertificationRecordModal({ isOpen, isEdit, currentCertificateRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const certificateRef = useRef(Certificate.empty());
+
+    useEffect(()=>{
+        if(isEdit){
+            certificateRef.current = currentCertificateRef.current;
+        }else {
+            certificateRef.current = Certificate.empty();
+        }
+    },[isOpen, isEdit])
 
     return (
         <>
@@ -37,7 +45,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Add Certification Record
+                                        {isEdit ? "Edit Certificate Record" : "Add Certificate Record"}
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
                                         {/* Enter title */}
@@ -47,6 +55,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. ABC College"
+                                                defaultValue={isEdit ? currentCertificateRef.current.title : certificateRef.current.title}
                                                 onChange={(e)=> {certificateRef.current.title = e.target.value}}
                                             />
                                         </label>
@@ -57,6 +66,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Coursera"
+                                                defaultValue={isEdit ? currentCertificateRef.current.providedBy : certificateRef.current.providedBy}
                                                 onChange={(e)=> {certificateRef.current.providedBy = e.target.value}}
                                             />
                                         </label>
@@ -67,6 +77,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. B.Tech CSE"
+                                                defaultValue={isEdit ? currentCertificateRef.current.link : certificateRef.current.link}
                                                 onChange={(e)=> {certificateRef.current.link = e.target.value}}
                                             />
                                         </label>
@@ -77,6 +88,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                                 type="date"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Java, Computer Architecture"
+                                                defaultValue={isEdit ? currentCertificateRef.current.getCompletedOnDate() : certificateRef.current.getCompletedOnDate()}
                                                 onChange={(e)=> certificateRef.current.setCompletedOnDate(e.target.value)}
                                             />
                                         </label>
@@ -86,7 +98,7 @@ export default function AddCertificationRecordModal({ isOpen, onClickCloseModal,
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={()=>onClickSave(certificateRef.current)}
+                                            onClick={()=> isEdit ? onClickEdit(certificateRef.current) : onClickSave(certificateRef.current)}
                                         >
                                         Submit Details
                                         </button>

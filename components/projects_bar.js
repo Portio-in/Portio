@@ -3,7 +3,7 @@ import ProjectOption from "./independent/project_option";
 
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
 import {useState, useRef, useEffect} from "react";
-import AddProjectRecordModal from "./independent/add_project_record_modal";
+import AddEditProjectRecordModal from "./independent/add_edit_project_record_modal";
 import GlobalController from "../controllers/controller";
 
 function ProjectsBar() {
@@ -58,7 +58,7 @@ function ProjectsBar() {
                 }
             </div>
             {/* Add modal */}
-            <AddProjectRecordModal isOpen={isOpenNewProjectModal} onClickCloseModal={()=>setIsOpenNewProjectModal(false)} onClickSave={(e)=>{submitNewProject(e)}} />
+            <AddEditProjectRecordModal isOpen={isOpenNewProjectModal} onClickCloseModal={()=>setIsOpenNewProjectModal(false)} onClickSave={(e)=>{submitNewProject(e)}} />
             {/* Edit/Delete project */}
             <EditDeleteChoiceModal
                 isOpen={isOpenEditDeleteProjectModal} 
