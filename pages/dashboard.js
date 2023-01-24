@@ -6,6 +6,7 @@ import ProjectsBar from "../components/projects_bar";
 import EducationBar from "../components/education_bar";
 import CertificationBar from "../components/certification_bar";
 import AchievementBar from "../components/achievement_bar";
+import ExperienceBar from "../components/experience_bar";
 import Footer from "../components/footer";
 import {getCookies} from "cookies-next";
 import {useEffect} from "react";
@@ -35,6 +36,8 @@ export default function dashbaord({token}) {
                 <CertificationBar />
                 {/* <!-- Achievements --> */}
                 <AchievementBar />
+                {/* <!-- Experience --> */}
+                <ExperienceBar />
                 {/* Footer */}
                 <Footer />
             </div>

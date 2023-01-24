@@ -1,10 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useRef} from 'react'
-import Experience from "../../models/experience";
+import Experience from "../../models/working_experience";
 
-export default function AddExperienceRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
     const experienceRef = useRef(Experience.empty());
-    // ROle, Organiztion, start, end, Accomplishments
+    // Role, Organization, start, end, Accomplishments
     return (
         <>
             <Transition show={isOpen} as={Fragment}>
@@ -40,9 +40,9 @@ export default function AddExperienceRecordModal({ isOpen, onClickCloseModal, on
                                         Add Experience Record
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
-                                        {/* Enter title */}
+                                        {/* Enter role */}
                                         <label className="block mb-4">
-                                            <span className="text-gray-700">Title <span className='text-red-700'>*</span></span>
+                                            <span className="text-gray-700">Role <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -50,24 +50,25 @@ export default function AddExperienceRecordModal({ isOpen, onClickCloseModal, on
                                                 onChange={(e)=> {experienceRef.current.role = e.target.value}}
                                             />
                                         </label>
-                                        {/* Enter description */}
+                                        {/* Enter organization */}
                                         <label className="block mb-4">
-                                            <span className="text-gray-700">Description <span className='text-red-700'>*</span></span>
+                                            <span className="text-gray-700">Organization <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                placeholder="i.e. NITR"
-                                                onChange={(e)=> {experienceRef.current.description = e.target.value}}
+                                                placeholder="i.e. Twitter"
+                                                onChange={(e)=> {experienceRef.current.organization = e.target.value}}
                                             />
                                         </label>
-                                        {/* Enter link */}
+                                        {/* Enter Accomplishments */}
+                                        {/*TODO improvemnts*/}
                                         <label className="block mb-4">
-                                            <span className="text-gray-700">Certificate / Reference Link <span className='text-red-700'>*</span></span>
+                                            <span className="text-gray-700">Accomplishments <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                placeholder="i.e. B.Tech CSE"
-                                                onChange={(e)=> {experienceRef.current.referenceLink = e.target.value}}
+                                                placeholder="i.e. comma seperated values"
+                                                onChange={(e)=> {experienceRef.current.accomplishments = e.target.value.split(",")}}
                                             />
                                         </label>
                                         <div className='flex flex-col md:flex-row gap-4 mb-6'>

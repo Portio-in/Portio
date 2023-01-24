@@ -1,12 +1,12 @@
 import {useEffect, useRef, useState} from "react";
 import ExperienceRecord from "./independent/experience_record";
-import AddExperienceRecordModal from "./independent/add_experience_record_modal";
+import AddEditExperienceRecordModal from "./independent/add_edit_experience_record_modal";
 import AddExperienceRecord from "./independent/add_experience_record";
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
 import GlobalController from "../controllers/controller";
 
 function ExperienceBar() {
-    const controller = GlobalController.getInstance().achievementController;
+    const controller = GlobalController.getInstance().experienceController;
     const [experience, setExperience] = useState([]);
     const currentRecord = useRef(null);
     let [isOpenNewExperienceModal, setIsOpenNewExperienceModal] = useState(false)
@@ -60,7 +60,7 @@ function ExperienceBar() {
             </div>
 
             {/* Add Experience Record */}
-            <AddExperienceRecordModal isOpen={isOpenNewExperienceModal} onClickCloseModal={()=>setIsOpenNewExperienceModal(false)} onClickSave={(e)=>submitNewExperience(e)} />
+            <AddEditExperienceRecordModal isOpen={isOpenNewExperienceModal} onClickCloseModal={()=>setIsOpenNewExperienceModal(false)} onClickSave={(e)=>submitNewExperience(e)} />
             {/* Edit/Delete Record */}
             <EditDeleteChoiceModal
                 isOpen={isOpenEditDeleteLinkModal}

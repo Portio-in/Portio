@@ -70,8 +70,8 @@ class  WorkingExperience{
             id: this.id,
             role: this.role,
             organization: this.organization,
-            startingDate: formattedDateToTZFormat(this.startingDate),
-            endingDate: e,
+            starting_date: formattedDateToTZFormat(this.startingDate),
+            ending_date: e,
             accomplishments: this.accomplishments
         }
     }
