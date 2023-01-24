@@ -1,9 +1,8 @@
 import MenuBarOption from "./independent/menubar_option";
-import profilePicIcon from "../assets/img/profile-pic-icon.png";
 import uploadResumeIcon from "../assets/img/upload-resume-icon.png";
 import copyPortfolioIcon from "../assets/img/copy-portfolio-link-icon.png";
 import domainManageIcon from "../assets/img/domain-manage-icon.png";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import DomainConfigureModal from "./independent/domain_configure_modal";
 import EditProfileModal from "./independent/ediit_profile_modal";
 import GlobalController from  "../controllers/controller";
@@ -13,6 +12,7 @@ function MenuBar() {
     const [isDomainConfigureModalOpen, setIsDomainConfigureModalOpen] = useState(false)
     const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
     const profile = useRef(Profile.empty());
+    const [avatar, setAvatar] = useState("https://personalprojectts.s3.ap-south-1.amazonaws.com/167457283523936ed847c2ae62dfb3e47c5316166afb9.jpg");
 
     const openDomainConfigureModal = () => {
         GlobalController.fetchProfile()
@@ -54,10 +54,18 @@ function MenuBar() {
         })
     }
 
+    useEffect(()=>{
+        GlobalController.fetchProfile()
+            .then((profile)=>{
+                profile.current = profile;
+                setAvatar(profile.current.avatar);
+            })
+    })
+
     return (
         <>
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto mt-6 md:mt-10">
-                <MenuBarOption icon={profilePicIcon} label="Edit Profile" onclick={openProfileConfigureModal} />
+                <MenuBarOption icon={avatar} label="Edit Profile" onclick={openProfileConfigureModal} />
                 <MenuBarOption icon={domainManageIcon} label="Domain Management" onclick={openDomainConfigureModal} />
                 <MenuBarOption icon={uploadResumeIcon} label="Upload Resume" />
                 <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" />

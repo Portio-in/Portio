@@ -26,7 +26,13 @@ const nextConfig = {
         hostname: "personalprojectts.s3.ap-south-1.amazonaws.com",
         port: "",
         pathname: '/**',
-      }
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: '/**',
+      },
     ]
   }
 }
