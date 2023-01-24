@@ -10,6 +10,7 @@ function ExperienceBar() {
     const [experience, setExperience] = useState([]);
     const currentRecord = useRef(null);
     let [isOpenNewExperienceModal, setIsOpenNewExperienceModal] = useState(false)
+    let [isEditExperienceModal, setIsEditExperienceModal] = useState(false)
     let [isOpenEditDeleteLinkModal, setIsOpenEditDeleteLinkModal] = useState(false)
 
     const submitNewExperience = (record) => {
@@ -20,6 +21,21 @@ function ExperienceBar() {
             }
         })
     }
+
+    const editExperience = (record) => {
+        controller.update(record).then((res) => {
+            if (res.success) {
+                setExperience(experience.map((e) => {
+                    if (e.id === record.id) {
+                        return record;
+                    }
+                    return e;
+                }))
+                setIsOpenNewExperienceModal(false);
+            }
+        })
+    }
+
 
     const deleteExperience = (record) => {
         controller.delete(record).then((res) => {
@@ -44,7 +60,10 @@ function ExperienceBar() {
             <p className="text-brand text-lg md:text-xl font-medium mt-10 mb-4">Experiences</p>
             {/* <!-- Experience List --> */}
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto ">
-                <AddExperienceRecord onClick={()=>setIsOpenNewExperienceModal(true)} />
+                <AddExperienceRecord onClick={()=> {
+                    setIsEditExperienceModal(false);
+                    setTimeout(()=>setIsOpenNewExperienceModal(true), 100);
+                }} />
                 {
                     experience.map((ele)=>
                         <ExperienceRecord
@@ -60,14 +79,27 @@ function ExperienceBar() {
             </div>
 
             {/* Add Experience Record */}
-            <AddEditExperienceRecordModal isOpen={isOpenNewExperienceModal} onClickCloseModal={()=>setIsOpenNewExperienceModal(false)} onClickSave={(e)=>submitNewExperience(e)} />
+            <AddEditExperienceRecordModal
+                isOpen={isOpenNewExperienceModal}
+                isEdit={isEditExperienceModal}
+                currentExperienceRef={currentRecord}
+                onClickCloseModal={()=>setIsOpenNewExperienceModal(false)}
+                onClickSave={(e)=>submitNewExperience(e)}
+                onClickEdit={(e)=>editExperience(e)}
+            />
             {/* Edit/Delete Record */}
             <EditDeleteChoiceModal
                 isOpen={isOpenEditDeleteLinkModal}
                 onClickCloseModal={()=>setIsOpenEditDeleteLinkModal(false)}
-                editLabel="Edit Achievement  Details"
-                deleteLabel="Delete Achievement Record"
-                onClickEdit={()=>{}}
+                editLabel="Edit Experience  Details"
+                deleteLabel="Delete Experience Record"
+                onClickEdit={()=>{
+                    setIsEditExperienceModal(true);
+                    setTimeout(()=>{
+                        setIsOpenNewExperienceModal(true);
+                        setIsOpenEditDeleteLinkModal(false);
+                    }, 100);
+                }}
                 onClickDelete={()=>{
                     deleteExperience(currentRecord.current);
                 }}

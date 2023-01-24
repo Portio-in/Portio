@@ -1,10 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useRef} from 'react'
+import {Fragment, useEffect, useRef} from 'react'
 import Experience from "../../models/working_experience";
 
-export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddEditExperienceRecordModal({ isOpen, isEdit, currentExperienceRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const experienceRef = useRef(Experience.empty());
-    // Role, Organization, start, end, Accomplishments
+    useEffect(()=>{
+        if(isEdit){
+            experienceRef.current = currentExperienceRef.current;
+        }else {
+            experienceRef.current = Experience.empty();
+        }
+    },[isOpen, isEdit])
     return (
         <>
             <Transition show={isOpen} as={Fragment}>
@@ -37,7 +43,7 @@ export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Add Experience Record
+                                        {isEdit ? "Edit" : "Add"} Experience Record
                                     </Dialog.Title>
                                     <div className="mt-4 mb-4">
                                         {/* Enter role */}
@@ -47,6 +53,7 @@ export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. SRE"
+                                                defaultValue={isEdit ? currentExperienceRef.current.role : experienceRef.current.role}
                                                 onChange={(e)=> {experienceRef.current.role = e.target.value}}
                                             />
                                         </label>
@@ -57,17 +64,18 @@ export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Twitter"
+                                                defaultValue={isEdit ? currentExperienceRef.current.organization : experienceRef.current.organization}
                                                 onChange={(e)=> {experienceRef.current.organization = e.target.value}}
                                             />
                                         </label>
                                         {/* Enter Accomplishments */}
-                                        {/*TODO improvemnts*/}
                                         <label className="block mb-4">
                                             <span className="text-gray-700">Accomplishments <span className='text-red-700'>*</span></span>
                                             <input
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. comma seperated values"
+                                                defaultValue={isEdit ? currentExperienceRef.current.accomplishments : experienceRef.current.accomplishments}
                                                 onChange={(e)=> {experienceRef.current.accomplishments = e.target.value.split(",")}}
                                             />
                                         </label>
@@ -79,6 +87,7 @@ export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal
                                                     type="date"
                                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    defaultValue={isEdit ? currentExperienceRef.current.getStartingDate() : experienceRef.current.getStartingDate()}
                                                     onChange={(e)=> {experienceRef.current.setStartingDate(e.target.value)}}
                                                 />
                                             </label>
@@ -90,6 +99,7 @@ export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal
                                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
                                                     id="project_ending_date"
+                                                    defaultValue={isEdit ? currentExperienceRef.current.getEndingDate() : experienceRef.current.getEndingDate()}
                                                     onChange={(e)=> {experienceRef.current.setEndingDate(e.target.value)}}
                                                 />
                                             </label>
@@ -99,7 +109,7 @@ export default function AddEditExperienceRecordModal({ isOpen, onClickCloseModal
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={()=>onClickSave(experienceRef.current)}
+                                            onClick={()=>isEdit ? onClickEdit(experienceRef.current) : onClickSave(experienceRef.current)}
                                         >
                                             Submit Details
                                         </button>

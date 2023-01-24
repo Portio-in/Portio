@@ -26,6 +26,7 @@ class  WorkingExperience{
     }
 
     getStartingDate(){
+        if(this.startingDate === null || this.startingDate === undefined || this.startingDate === "") return null;
         let splitted = this.startingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];
@@ -42,7 +43,7 @@ class  WorkingExperience{
     }
 
     getEndingDate(){
-        if(this.endingDate === null) return null;
+        if(this.endingDate === null|| this.endingDate === undefined || this.endingDate === "") return null;
         let splitted = this.endingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];
@@ -65,13 +66,15 @@ class  WorkingExperience{
     }
 
     toJson () {
+        let s= formattedDateToTZFormat(this.startingDate);
+        if(s === "") s = null;
         let e = formattedDateToTZFormat(this.endingDate);
         if(e === "") e = null;
         return {
             id: this.id,
             role: this.role,
             organization: this.organization,
-            starting_date: formattedDateToTZFormat(this.startingDate),
+            starting_date: s,
             ending_date: e,
             accomplishments: this.accomplishments
         }

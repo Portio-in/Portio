@@ -71,12 +71,12 @@ class Education{
             let splitted = date.split("-");
             this.endingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`;
         }catch (e) {
-            this.endingDate = "";
+            this.endingDate = null;
         }
     }
 
     getEndingDate(){
-        if(this.endingDate === null) return null;
+        if(this.endingDate === null || this.endingDate === undefined || this.endingDate === "") return null;
 
         let splitted = this.endingDate.split("-");
         let year = splitted[2];

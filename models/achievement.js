@@ -44,7 +44,7 @@ class Achievement{
     }
 
     getDate(){
-        if(this.date === null) return null;
+        if(this.date === null|| this.date === undefined || this.date === "") return null;
         let splitted = this.date.split("-");
         let year = splitted[2];
         let month = splitted[1];
