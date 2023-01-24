@@ -1,9 +1,17 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useRef} from 'react'
+import {Fragment, useEffect, useRef} from 'react'
 import Achievement from "../../models/achievement";
 
-export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, onClickSave }) {
+export default function AddAchievementsRecordModal({ isOpen, isEdit, currentAchievementRef, onClickCloseModal, onClickSave, onClickEdit }) {
     const achievementRef = useRef(Achievement.empty());
+
+    useEffect(()=>{
+        if(isEdit){
+            achievementRef.current = currentAchievementRef.current;
+        }else {
+            achievementRef.current = Achievement.empty();
+        }
+    },[isOpen, isEdit])
 
     return (
         <>
@@ -47,6 +55,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. Hackodisha 2.0"
+                                                defaultValue={isEdit ? currentAchievementRef.current.title : achievementRef.current.title}
                                                 onChange={(e)=> {achievementRef.current.title = e.target.value}}
                                             />
                                         </label>
@@ -57,6 +66,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. NITR"
+                                                defaultValue={isEdit ? currentAchievementRef.current.description : achievementRef.current.description}
                                                 onChange={(e)=> {achievementRef.current.description = e.target.value}}
                                             />
                                         </label>
@@ -67,6 +77,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                                 type="text"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 placeholder="i.e. B.Tech CSE"
+                                                defaultValue={isEdit ? currentAchievementRef.current.referenceLink : achievementRef.current.referenceLink}
                                                 onChange={(e)=> {achievementRef.current.referenceLink = e.target.value}}
                                             />
                                         </label>
@@ -78,6 +89,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                                     type="date"
                                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                     placeholder="i.e. 01-01-2010"
+                                                    defaultValue={isEdit ? currentAchievementRef.current.getDate() : achievementRef.current.date}
                                                     onChange={(e)=> {achievementRef.current.setDate(e.target.value)}}
                                                 />
                                             </label>
@@ -87,7 +99,7 @@ export default function AddAchievementsRecordModal({ isOpen, onClickCloseModal, 
                                         <button
                                             type="button"
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-                                            onClick={()=>onClickSave(achievementRef.current)}
+                                            onClick={()=>isEdit ? onClickEdit(achievementRef.current) : onClickSave(achievementRef.current)}
                                         >
                                         Submit Details
                                         </button>

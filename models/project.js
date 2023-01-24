@@ -21,9 +21,31 @@ class Project{
         this.startingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`
     }
 
+    getStartingDate(){
+        let splitted = this.startingDate.split("-");
+        let year = splitted[2];
+        let month = splitted[1];
+        let day = splitted[0];
+
+        if (month.length === 1) month = `0${month}`;
+        if (day.length === 1) day = `0${day}`;
+        return `${year}-${month}-${day}`;
+    }
+
     setEndingDate(date){
         let splitted = date.split("-");
         this.endingDate = `${splitted[2]}-${splitted[1]}-${splitted[0]}`
+    }
+
+    getEndingDate(){
+        let splitted = this.endingDate.split("-");
+        let year = splitted[2];
+        let month = splitted[1];
+        let day = splitted[0];
+
+        if (month.length === 1) month = `0${month}`;
+        if (day.length === 1) day = `0${day}`;
+        return `${year}-${month}-${day}`;
     }
 
     static fromJson(json){
