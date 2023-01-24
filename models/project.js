@@ -38,6 +38,7 @@ class Project{
     }
 
     getEndingDate(){
+        if(this.endingDate === null) return null;
         let splitted = this.endingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];

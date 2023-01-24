@@ -76,6 +76,8 @@ class Education{
     }
 
     getEndingDate(){
+        if(this.endingDate === null) return null;
+
         let splitted = this.endingDate.split("-");
         let year = splitted[2];
         let month = splitted[1];
@@ -86,10 +88,6 @@ class Education{
         return `${year}-${month}-${day}`;
     }
 
-    getEndingDate(){
-        if(this.endingDate === null || this.endingDate === undefined || this.endingDate === "") return "Present";
-        return this.endingDate;
-    }
 
     validate(){
         return isBlank(this.courseName) && isBlank(this.institutionName) && isBlank(this.startingDate);
