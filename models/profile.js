@@ -24,7 +24,7 @@ class Profile{
             domain: json.domain,
             phone: json.phone,
             avatar: json.avatar,
-            tagline: "",
+            tagline: json.tagline,
             description: json.description,
             techStacks: json.techStacks.map((e)=>TechStackType.fromJson(e)),
             activeTemplate: PortfolioTemplate.fromJson(json.activeTemplate)
