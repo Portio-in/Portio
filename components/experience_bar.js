@@ -36,7 +36,6 @@ function ExperienceBar() {
         })
     }
 
-
     const deleteExperience = (record) => {
         controller.delete(record).then((res) => {
             if (res) {
@@ -51,8 +50,6 @@ function ExperienceBar() {
             setExperience(records);
         });
     }, []);
-
-
 
     return (
         <>
