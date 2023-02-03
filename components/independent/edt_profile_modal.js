@@ -29,7 +29,7 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
         if(selectedTechStacks.find((e)=>e.id === techStack.id) !== undefined) return;
         setSelectedTechStacks([...selectedTechStacks, techStack]);
         currProfRef.current.techStacks.push(techStack);
-    }git 
+    }
 
     function removeTechStack(techStackId) {
         if(techStackId === null || techStackId === undefined || techStackId === "") return;

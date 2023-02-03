@@ -7,6 +7,7 @@ import DomainConfigureModal from "./independent/domain_configure_modal";
 import EditProfileModal from "./independent/edt_profile_modal";
 import GlobalController from  "../controllers/controller";
 import Profile from "../models/profile";
+import toast from 'react-hot-toast';
 
 function MenuBar() {
     const [isDomainConfigureModalOpen, setIsDomainConfigureModalOpen] = useState(false)
@@ -27,11 +28,18 @@ function MenuBar() {
     }
 
     const updateDomain = (profile_updated) =>{
+        if(!profile_updated.domain.endsWith(".portio.in"))  {
+            toast.error("Domain must be a subdomain of portio");
+            return;
+        }
         GlobalController.getInstance().profileController.updateDomain(profile_updated.domain).then((res)=>{
-            if(res.success){
+            if(res.success) {
                 GlobalController.profile = res.record;
                 profile.current = res.record;
                 setIsDomainConfigureModalOpen(false);
+                toast.success("Domain updated");
+            }else {
+                toast.error("Domain, not updated");
             }
         })
     }
@@ -50,8 +58,16 @@ function MenuBar() {
                 GlobalController.profile = res.record;
                 profile.current = res.record;
                 setIsEditProfileModalOpen(false);
+                toast.success("Profile updated");
+            }else {
+                toast.error("Profile not updated");
             }
         })
+    }
+
+    const handleCopy = async () => {
+        await navigator.clipboard.writeText(profile.current.domain);
+        toast.success("portfolio link copied to clipboard");
     }
 
     useEffect(()=>{
@@ -68,7 +84,7 @@ function MenuBar() {
                 <MenuBarOption icon={avatar} label="Edit Profile" onclick={openProfileConfigureModal} />
                 <MenuBarOption icon={domainManageIcon} label="Domain Management" onclick={openDomainConfigureModal} />
                 <MenuBarOption icon={uploadResumeIcon} label="Upload Resume" />
-                <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" />
+                <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" onclick={handleCopy}/>
             </div>
 
             <DomainConfigureModal profileRef={profile} isOpen={isDomainConfigureModalOpen} onClickCloseModal={()=>setIsDomainConfigureModalOpen(false)} onClickUpdate={updateDomain} />
