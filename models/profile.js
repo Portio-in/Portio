@@ -47,6 +47,7 @@ class Profile{
         if(forUpdate){
             delete data.email;
             delete data.techStacks;
+            data["tech_stacks_id"] = this.techStacks.map((e)=>e.id);
             delete data.activeTemplate;
         }
         return data;

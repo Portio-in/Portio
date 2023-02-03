@@ -1,13 +1,43 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useEffect, useRef} from 'react'
+import {Fragment, useEffect, useRef, useState} from 'react'
 import Profile from "../../models/profile"
+import GlobalController from "../../controllers/controller";
 
 export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal, onClickUpdate }) {
     const currProfRef = useRef(Profile.copy(profileRef.current));
-    currProfRef.current = Profile.copy(profileRef.current);
+    /** @type {TechStackType[]} */
+    const [availableChoices, setAvailableChoices] = useState([]);
+    /** @type {TechStackType[]} */
+    const [selectedTechStacks, setSelectedTechStacks] = useState([]);
 
     useEffect(()=>{
-    }, []);
+        currProfRef.current = Profile.copy(profileRef.current);
+        async function fetchChoices() {
+            const choices = await GlobalController.getInstance().availableChoicesController.fetch_techStacks();
+            setAvailableChoices(choices);
+        }
+        fetchChoices().then(() => {
+            setSelectedTechStacks(profileRef.current.techStacks);
+        });
+    }, [isOpen]);
+
+    function selectTechStack(techStackId) {
+        if(techStackId === null || techStackId === undefined || techStackId === "") return;
+        const techStack = availableChoices.find((e)=>e.id === parseInt(techStackId));
+        if(techStack === null || techStack === undefined) return;
+        // Check whether the techStack is already selected
+        if(selectedTechStacks.find((e)=>e.id === techStack.id) !== undefined) return;
+        setSelectedTechStacks([...selectedTechStacks, techStack]);
+        currProfRef.current.techStacks.push(techStack);
+    }git 
+
+    function removeTechStack(techStackId) {
+        if(techStackId === null || techStackId === undefined || techStackId === "") return;
+        const techStack = availableChoices.find((e)=>e.id === parseInt(techStackId));
+        if(techStack === null || techStack === undefined) return;
+        setSelectedTechStacks(selectedTechStacks.filter((e)=>e.id !== techStack.id));
+        currProfRef.current.techStacks = currProfRef.current.techStacks.filter((e)=>e.id !== techStack.id);
+    }
 
     return (
         <>
@@ -78,6 +108,39 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
                                                 onChange={(e)=> {currProfRef.current.phone = e.target.value}}
                                             />
                                         </label>
+                                        {/* Select tech stacks */}
+                                        <label className="block mb-4">
+                                            <span className="text-gray-700">Select Tech Stacks</span>
+                                            <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={(e)=>selectTechStack(e.target.value)}>
+                                                {
+                                                    availableChoices.map((choice, index) => {
+                                                        return (
+                                                            <option key={choice.id} value={choice.id}>{choice.name}</option>
+                                                        )
+                                                    })
+                                                }
+                                            </select>
+                                        </label>
+                                        <div className="w-full flex flex-row flex-wrap">
+                                            {
+                                                selectedTechStacks.map((ele)=>
+                                                    <div className="flex justify-center items-center m-1 font-medium py-2 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 stretch-0 w-fit">
+                                                        <div className="text-base font-normal leading-none max-w-full">{ele.name} </div>
+                                                        <div className="flex flex-auto flex-row-reverse" onClick={() => removeTechStack(ele.id)}>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                                     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                                                     className="feather feather-x cursor-pointer hover:text-indigo-400 rounded-full w-4 h-4 ml-2">
+                                                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
                                         {/* Enter description */}
                                         <label className="block mb-4">
                                             <span className="text-gray-700">Description <span className='text-red-700'>*</span></span>
