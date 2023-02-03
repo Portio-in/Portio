@@ -56,8 +56,8 @@ function MenuBar() {
 
     useEffect(()=>{
         GlobalController.fetchProfile()
-            .then((profile)=>{
-                profile.current = profile;
+            .then((fetched_profile)=>{
+                profile.current = fetched_profile;
                 setAvatar(profile.current.avatar);
             })
     })
