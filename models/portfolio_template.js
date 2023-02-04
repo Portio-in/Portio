@@ -1,11 +1,12 @@
 class PortfolioTemplate{
-    constructor({id, code, name, previewimg, author, githubLink}){
+    constructor({id, code, name, previewimg, author, githubLink, totalInstalls}){
         this.id = id;
         this.code = code;
         this.name = name;
         this.previewimg = previewimg;
         this.author = author;
         this.githubLink = githubLink;
+        this.totalInstalls = totalInstalls;
     }
 
     static fromJson(json){
@@ -15,7 +16,8 @@ class PortfolioTemplate{
             name: json.name,
             previewimg: json.previewimg,
             author: json.author,
-            githubLink: json.githubLink
+            githubLink: json.githubLink,
+            totalInstalls: json.totalInstalls
         });
     }
 
@@ -26,7 +28,8 @@ class PortfolioTemplate{
             name: this.name,
             previewimg: this.previewimg,
             author: this.author,
-            githubLink: this.githubLink
+            githubLink: this.githubLink,
+            totalInstalls: this.totalInstalls
         }
     }
 
@@ -35,7 +38,8 @@ class PortfolioTemplate{
             id: null,
             code: "",
             name: "",
-            previewimg: ""
+            previewimg: "",
+            totalInstalls: 0,
         })
     }
 }
