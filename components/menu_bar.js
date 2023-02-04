@@ -65,9 +65,13 @@ function MenuBar() {
         })
     }
 
-    const handleCopy = async () => {
+    const copyPortfolioLinkToClipboard = async () => {
         await navigator.clipboard.writeText(profile.current.domain);
         toast.success("link copied to clipboard");
+    }
+
+    const openPortfolioLinkToNewTab = async () => {
+        window.open("//"+profile.current.domain, '_blank');
     }
 
     useEffect(()=>{
@@ -84,7 +88,8 @@ function MenuBar() {
                 <MenuBarOption icon={avatar} label="Edit Profile" onclick={openProfileConfigureModal} />
                 <MenuBarOption icon={domainManageIcon} label="Update Domain" onclick={openDomainConfigureModal} />
                 {/*<MenuBarOption icon={uploadResumeIcon} label="Upload Resume" />*/}
-                <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" onclick={handleCopy}/>
+                <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" onclick={copyPortfolioLinkToClipboard}/>
+                <MenuBarOption icon={copyPortfolioIcon} label="Open Portfolio" onclick={openPortfolioLinkToNewTab}/>
             </div>
 
             <DomainConfigureModal profileRef={profile} isOpen={isDomainConfigureModalOpen} onClickCloseModal={()=>setIsDomainConfigureModalOpen(false)} onClickUpdate={updateDomain} />
