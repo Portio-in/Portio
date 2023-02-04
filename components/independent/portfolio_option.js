@@ -20,7 +20,7 @@ function PortfolioOption({ template, active, onClick }) {
                     <br></br>
                     <FontAwesomeIcon icon={faGithub} /> {template.author}&nbsp;<Link href={template.githubLink} target="_blank"><FontAwesomeIcon icon={faArrowUpRightFromSquare}/></Link>
                     <br></br>
-                    <FontAwesomeIcon icon={faStar} color="#FFD700" /> {template.totalInstalls} installs
+                    <FontAwesomeIcon icon={faStar} color="#FFD700" /> {template.totalInstalls} times installed
                 </p>
             </div>
         </>
