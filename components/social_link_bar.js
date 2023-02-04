@@ -1,5 +1,6 @@
 import { faFacebookF, faGithub } from "@fortawesome/free-brands-svg-icons";
 import {useEffect, useRef, useState} from "react";
+import toast from 'react-hot-toast';
 import AddEditSocialLinkModal from "./independent/add_edit_social_link_modal";
 import AddSocialLinkOption from "./independent/add_social_link_option";
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
@@ -25,6 +26,9 @@ function SocialLinkBar() {
                     return e;
                 }))
                 setIsOpenNewSocialLinkModal(false);
+                toast.success("Social link updated");
+            } else {
+                toast.error("Social link not updated, please try again.");
             }
         })
     }
@@ -34,6 +38,9 @@ function SocialLinkBar() {
             if (res.success) {
                 setSocialLink([...socialLink, res.record])
                 setIsOpenNewSocialLinkModal(false);
+                toast.success("New social link added");
+            } else {
+                toast.error("Social link not added, please try again.");
             }
         })
     }
@@ -43,6 +50,9 @@ function SocialLinkBar() {
             if (res) {
                 setSocialLink(socialLink.filter((e) => e.id !== record.id))
                 setIsOpenEditDeleteLinkModal(false);
+                toast.success("Social link removed");
+            } else {
+                toast.error("Social link not removed, please try again.");
             }
         })
     }
@@ -74,7 +84,6 @@ function SocialLinkBar() {
                                 ele.type.type === "facebook" ? "#3F72E5" :
                                 ele.type.type === "github" ? "#161B23" : "#cc6b2c"
                             }
-                            key={ele.id}
                             onClick={()=>{
                                 currentRecord.current = ele;
                                 setIsOpenEditDeleteLinkModal(true);

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import toast from 'react-hot-toast';
 import AddEducationRecord from "./independent/add_education_record";
 import AddEditEducationRecordModal from "./independent/add_edit_education_record_modal";
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
@@ -18,6 +19,9 @@ function EducationBar() {
             if (res.success) {
                 setEducation([...education, res.record])
                 setIsOpenNewEducationModal(false);
+                toast.success("New Education record added");
+            } else {
+                toast.error("Education record not added, please try again.");
             }
         })
     }
@@ -32,6 +36,9 @@ function EducationBar() {
                     return e;
                 }))
                 setIsOpenNewEducationModal(false);
+                toast.success("Education record updated");
+            } else {
+                toast.error("Education record not updated, please try again.");
             }
         })
     }
@@ -41,6 +48,9 @@ function EducationBar() {
             if (res) {
                 setEducation(education.filter((e) => e.id !== record.id))
                 setIsOpenEditDeleteLinkModal(false);
+                toast.success("New Education record removed");
+            } else {
+                toast.error("Education record not removed, please try again.");
             }
         })
     }

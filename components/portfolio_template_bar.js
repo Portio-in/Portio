@@ -1,6 +1,7 @@
+import {useEffect, useState} from "react";
+import toast from 'react-hot-toast';
 import PortfolioOption from "./independent/portfolio_option";
 import GlobalController from "../controllers/controller";
-import {useEffect, useState} from "react";
 
 function PortfolioTemplateBar() {
     const controller = GlobalController.getInstance();
@@ -22,6 +23,9 @@ function PortfolioTemplateBar() {
             if(res.success){
                 GlobalController.profile = res.record;
                 setActiveTemplateID(GlobalController.profile.activeTemplate.id);
+                toast.success("Portfolio template changed");
+            } else {
+                toast.error("Portfolio template not changed, please try again.");
             }
         })
     }

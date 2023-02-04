@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from "react";
+import toast from 'react-hot-toast';
 import AchievementRecord from "./independent/achievement_record";
 import AddEditAchievementsRecordModal from "./independent/add_edit_achievements_record_modal";
 import AddAchievementRecord from "./independent/add_achievement_record";
@@ -18,7 +19,11 @@ function AchievementBar() {
             if (res.success) {
                 setAchievements([...achievements, res.record])
                 setIsOpenNewAchievementModal(false);
+                toast.success("New achievement added");
+            } else {
+                toast.error("Achievement not added, please try again.");
             }
+
         })
     }
 
@@ -31,7 +36,10 @@ function AchievementBar() {
                     }
                     return e;
                 }))
-                setIsOpenNewAchievementModal(false);
+                setIsOpenNewAchievementModal(false);    
+                toast.success("Achievement updated");
+            } else {
+                toast.error("Achievement not updated, please try again.");
             }
         })
     }
@@ -41,6 +49,9 @@ function AchievementBar() {
             if (res) {
                 setAchievements(achievements.filter((e) => e.id !== record.id))
                 setIsOpenEditDeleteLinkModal(false);
+                toast.success("Achievement removed");
+            } else {
+                toast.error("Achievement not removed, please try again.");
             }
         })
     }

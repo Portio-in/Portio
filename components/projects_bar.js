@@ -1,8 +1,9 @@
+import {useState, useRef, useEffect} from "react";
+import toast from 'react-hot-toast';
 import AddProjectOption from "./independent/add_project_option";
 import ProjectOption from "./independent/project_option";
 
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
-import {useState, useRef, useEffect} from "react";
 import AddEditProjectRecordModal from "./independent/add_edit_project_record_modal";
 import GlobalController from "../controllers/controller";
 
@@ -19,6 +20,9 @@ function ProjectsBar() {
             if (res.success) {
                 setProjects([...projects, res.record]);
                 setIsOpenNewProjectModal(false);
+                toast.success("New project record added");
+            } else {
+                toast.error("Project record not added, please try again.");
             }
         })
     }
@@ -33,6 +37,9 @@ function ProjectsBar() {
                     return e;
                 }))
                 setIsOpenNewProjectModal(false);
+                toast.success("Project record updated");
+            } else {
+                toast.error("Project record not updated, please try again.");
             }
         })
     }
@@ -42,6 +49,9 @@ function ProjectsBar() {
             if (res) {
                 setProjects(projects.filter((e) => e.id !== record.id));
                 setIsOpenNewProjectModal(false);
+                toast.success("Project record removed");
+            } else {
+                toast.error("Project record not removed, please try again.");
             }
         })
     }

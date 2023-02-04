@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import toast from 'react-hot-toast';
 import AddEditCertificationRecordModal from "./independent/add_edit_certificate_record_modal";
 import AddCertificationRecord from "./independent/add_certification_record";
 import CertificationRecord from "./independent/certification_record";
@@ -18,6 +19,9 @@ function CertificationBar() {
             if (res.success) {
                 setCertificates([...certificates, res.record])
                 setIsOpenNewCertificateModal(false);
+                toast.success("New certificate added");
+            } else {
+                toast.error("Certificate not added, please try again.");
             }
         })
     }
@@ -32,6 +36,9 @@ function CertificationBar() {
                     return e;
                 }))
                 setIsOpenNewCertificateModal(false);
+                toast.success("Certificate updated");
+            } else {
+                toast.error("Certificate not updated, please try again.");
             }
         })
     }
@@ -41,6 +48,9 @@ function CertificationBar() {
             if (res) {
                 setCertificates(certificates.filter((e) => e.id !== record.id))
                 setIsOpenEditDeleteLinkModal(false);
+                toast.success("Certificate removed");
+            } else {
+                toast.error("Certificate not removed, please try again.");
             }
         })
     }

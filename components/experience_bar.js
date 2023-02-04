@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from "react";
+import toast from 'react-hot-toast';
 import ExperienceRecord from "./independent/experience_record";
 import AddEditExperienceRecordModal from "./independent/add_edit_experience_record_modal";
 import AddExperienceRecord from "./independent/add_experience_record";
@@ -18,6 +19,9 @@ function ExperienceBar() {
             if (res.success) {
                 setExperience([...experience, res.record])
                 setIsOpenNewExperienceModal(false);
+                toast.success("New experience record added");
+            } else {
+                toast.error("Experience record not added, please try again.");
             }
         })
     }
@@ -32,6 +36,9 @@ function ExperienceBar() {
                     return e;
                 }))
                 setIsOpenNewExperienceModal(false);
+                toast.success("Experience record updated");
+            } else {
+                toast.error("Experience record not updated, please try again.");
             }
         })
     }
@@ -41,6 +48,9 @@ function ExperienceBar() {
             if (res) {
                 setExperience(experience.filter((e) => e.id !== record.id))
                 setIsOpenEditDeleteLinkModal(false);
+                toast.success("Experience record removed");
+            } else {
+                toast.error("Experience record not removed, please try again.");
             }
         })
     }

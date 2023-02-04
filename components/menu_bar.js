@@ -39,7 +39,7 @@ function MenuBar() {
                 setIsDomainConfigureModalOpen(false);
                 toast.success("Domain updated");
             }else {
-                toast.error("Domain, not updated");
+                toast.error("Domain not updated, , please try again.");
             }
         })
     }
@@ -60,7 +60,7 @@ function MenuBar() {
                 setIsEditProfileModalOpen(false);
                 toast.success("Profile updated");
             }else {
-                toast.error("Profile not updated");
+                toast.error("Profile not updated, please try again.");
             }
         })
     }
