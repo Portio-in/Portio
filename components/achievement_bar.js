@@ -41,6 +41,7 @@ function AchievementBar() {
             } else {
                 toast.error("Achievement not updated, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -53,6 +54,7 @@ function AchievementBar() {
             } else {
                 toast.error("Achievement not removed, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -105,10 +107,7 @@ function AchievementBar() {
                 deleteLabel="Delete Achievement Record"
                 onClickEdit={()=>{
                     setIsEditAchievementModal(true);
-                    setTimeout(()=>{
-                        setIsOpenNewAchievementModal(true);
-                        setIsOpenEditDeleteLinkModal(false);
-                    }, 100);
+                    setIsOpenNewAchievementModal(true);
                 }}
                 onClickDelete={()=>{
                     deleteAchievement(currentRecord.current);

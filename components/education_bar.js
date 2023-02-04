@@ -40,6 +40,7 @@ function EducationBar() {
             } else {
                 toast.error("Education record not updated, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -52,6 +53,7 @@ function EducationBar() {
             } else {
                 toast.error("Education record not removed, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -100,10 +102,7 @@ function EducationBar() {
                 deleteLabel="Delete Education Record"
                 onClickEdit={()=>{
                     setIsEditEducationModal(true);
-                    setTimeout(()=>{
-                        setIsOpenNewEducationModal(true);
-                        setIsOpenEditDeleteLinkModal(false);
-                    }, 100);
+                    setIsOpenNewEducationModal(true);
                 }}
                 onClickDelete={()=>{deleteEducation(currentRecord.current);}}
             />

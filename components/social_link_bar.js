@@ -42,6 +42,7 @@ function SocialLinkBar() {
             } else {
                 toast.error("Social link not added, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -54,6 +55,7 @@ function SocialLinkBar() {
             } else {
                 toast.error("Social link not removed, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -108,10 +110,7 @@ function SocialLinkBar() {
                 deleteLabel="Delete Social Link"
                 onClickEdit={()=>{
                     setIsEditSocialLinkModal(true);
-                    setTimeout(()=>{
-                        setIsOpenNewSocialLinkModal(true);
-                        setIsOpenEditDeleteLinkModal(false);
-                    }, 100);
+                    setIsOpenNewSocialLinkModal(true);
                 }}
                 onClickDelete={(e)=>{
                     deleteSocialLink(currentRecord.current)

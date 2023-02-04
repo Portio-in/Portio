@@ -40,6 +40,7 @@ function ExperienceBar() {
             } else {
                 toast.error("Experience record not updated, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -52,6 +53,7 @@ function ExperienceBar() {
             } else {
                 toast.error("Experience record not removed, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -102,10 +104,7 @@ function ExperienceBar() {
                 deleteLabel="Delete Experience Record"
                 onClickEdit={()=>{
                     setIsEditExperienceModal(true);
-                    setTimeout(()=>{
-                        setIsOpenNewExperienceModal(true);
-                        setIsOpenEditDeleteLinkModal(false);
-                    }, 100);
+                    setIsOpenNewExperienceModal(true);
                 }}
                 onClickDelete={()=>{
                     deleteExperience(currentRecord.current);

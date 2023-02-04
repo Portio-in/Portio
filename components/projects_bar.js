@@ -41,6 +41,7 @@ function ProjectsBar() {
             } else {
                 toast.error("Project record not updated, please try again.");
             }
+            setIsOpenEditDeleteProjectModal(false);
         })
     }
 
@@ -53,6 +54,7 @@ function ProjectsBar() {
             } else {
                 toast.error("Project record not removed, please try again.");
             }
+            setIsOpenEditDeleteProjectModal(false);
         })
     }
 
@@ -101,10 +103,7 @@ function ProjectsBar() {
                 deleteLabel="Delete Project Record"
                 onClickEdit={()=>{
                     setIsEditProjectModal(true);
-                    setTimeout(()=>{
-                        setIsOpenNewProjectModal(true);
-                        setIsOpenEditDeleteProjectModal(false);
-                    }, 100);
+                    setIsOpenNewProjectModal(true);
                 }}
                 onClickDelete={()=>{
                     deleteProject(currentRecord.current);

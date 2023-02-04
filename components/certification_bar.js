@@ -40,6 +40,7 @@ function CertificationBar() {
             } else {
                 toast.error("Certificate not updated, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -52,6 +53,7 @@ function CertificationBar() {
             } else {
                 toast.error("Certificate not removed, please try again.");
             }
+            setIsOpenEditDeleteLinkModal(false);
         })
     }
 
@@ -100,10 +102,7 @@ function CertificationBar() {
                 deleteLabel="Delete Certification Record"
                 onClickEdit={()=>{
                     setIsEditCertificateModal(true);
-                    setTimeout(()=>{
-                        setIsOpenNewCertificateModal(true);
-                        setIsOpenEditDeleteLinkModal(false);
-                    }, 100);
+                    setIsOpenNewCertificateModal(true);
                 }}
                 onClickDelete={()=>{
                     deleteCertificate(currentRecord.current);
