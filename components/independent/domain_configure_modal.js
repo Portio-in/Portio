@@ -52,6 +52,8 @@ export default function DomainConfigureModal({ isOpen, onClickCloseModal, onClic
                                                 defaultValue={newprofileRef.current.domain}
                                                 onChange={(e)=> {newprofileRef.current.domain = e.target.value}}
                                             />
+                                            <br></br>
+                                            <span className="text-gray-500 text-base">🔶 Currently we support only portio.in subdomains. Support for linking custom domain coming soon.</span>
                                         </label>
                                     </div>
 
