@@ -163,6 +163,17 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
                                                 onChange={(e)=> {currProfRef.current.tagline = e.target.value}}
                                             />
                                         </label>
+                                        {/* Resume Link */}
+                                        <label className="block mb-4">
+                                            <span className="text-gray-700">Resume Link <span className='text-red-700'>*</span></span>
+                                            <input
+                                                type="text"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                placeholder="Paste your resume link"
+                                                defaultValue={currProfRef.current.resumeLink}
+                                                onChange={(e)=> {currProfRef.current.resumeLink = e.target.value}}
+                                            />
+                                        </label>
                                     </div>
 
                                     <div className="mt-4">

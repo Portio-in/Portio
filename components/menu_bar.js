@@ -67,7 +67,7 @@ function MenuBar() {
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(profile.current.domain);
-        toast.success("portfolio link copied to clipboard");
+        toast.success("link copied to clipboard");
     }
 
     useEffect(()=>{
@@ -82,8 +82,8 @@ function MenuBar() {
         <>
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto mt-6 md:mt-10">
                 <MenuBarOption icon={avatar} label="Edit Profile" onclick={openProfileConfigureModal} />
-                <MenuBarOption icon={domainManageIcon} label="Domain Management" onclick={openDomainConfigureModal} />
-                <MenuBarOption icon={uploadResumeIcon} label="Upload Resume" />
+                <MenuBarOption icon={domainManageIcon} label="Update Domain" onclick={openDomainConfigureModal} />
+                {/*<MenuBarOption icon={uploadResumeIcon} label="Upload Resume" />*/}
                 <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" onclick={handleCopy}/>
             </div>
 

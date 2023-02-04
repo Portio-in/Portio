@@ -4,7 +4,6 @@ import {
     UPDATE_DOMAIN_ROUTE,
     UPDATE_PORTFOLIO_TEMPLATE_ROUTE
 } from "../route"
-import SocialLink from "../models/social_link";
 import Profile from "../models/profile";
 
 class ProfileController{
