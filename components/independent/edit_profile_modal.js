@@ -124,7 +124,7 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
                                         <div className="w-full flex flex-row flex-wrap">
                                             {
                                                 selectedTechStacks.map((ele)=>
-                                                    <div className="flex justify-center items-center m-1 font-medium py-2 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 stretch-0 w-fit">
+                                                    <div key={ele.id} className="flex justify-center items-center m-1 font-medium py-2 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 stretch-0 w-fit">
                                                         <div className="text-base font-normal leading-none max-w-full">{ele.name} </div>
                                                         <div className="flex flex-auto flex-row-reverse" onClick={() => removeTechStack(ele.id)}>
                                                             <div>

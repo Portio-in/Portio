@@ -4,7 +4,7 @@ import copyPortfolioIcon from "../assets/img/copy-portfolio-link-icon.png";
 import domainManageIcon from "../assets/img/domain-manage-icon.png";
 import {useEffect, useRef, useState} from "react";
 import DomainConfigureModal from "./independent/domain_configure_modal";
-import EditProfileModal from "./independent/edt_profile_modal";
+import EditProfileModal from "./independent/edit_profile_modal";
 import GlobalController from  "../controllers/controller";
 import Profile from "../models/profile";
 import toast from 'react-hot-toast';
