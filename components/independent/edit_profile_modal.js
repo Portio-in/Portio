@@ -1,17 +1,24 @@
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useEffect, useRef, useState} from 'react'
+import Image from 'next/image'
 import Profile from "../../models/profile"
 import GlobalController from "../../controllers/controller";
 
-export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal, onClickUpdate }) {
+export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal, onClickUpdate }) {    
+    const [isLoading, setIsLoading] = useState(false);
     const currProfRef = useRef(Profile.copy(profileRef.current));
     /** @type {TechStackType[]} */
     const [availableChoices, setAvailableChoices] = useState([]);
     /** @type {TechStackType[]} */
     const [selectedTechStacks, setSelectedTechStacks] = useState([]);
+    /** @type {string} */
+    const [selectedImage, setSelectedImage] = useState([]);
 
     useEffect(()=>{
         currProfRef.current = Profile.copy(profileRef.current);
+        setSelectedImage(profileRef.current.avatar);
         async function fetchChoices() {
             const choices = await GlobalController.getInstance().availableChoicesController.fetch_techStacks();
             setAvailableChoices(choices);
@@ -37,6 +44,16 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
         if(techStack === null || techStack === undefined) return;
         setSelectedTechStacks(selectedTechStacks.filter((e)=>e.id !== techStack.id));
         currProfRef.current.techStacks = currProfRef.current.techStacks.filter((e)=>e.id !== techStack.id);
+    }
+
+    async function handleFileUpload(files){
+        setIsLoading(true);
+        const res = await GlobalController.getInstance().apiClient.uploadFiles(files);
+        if(res.success){
+            currProfRef.current.avatar = res.links[0];
+            setSelectedImage( res.links[0] );
+        }
+        setIsLoading(false);
     }
 
     return (
@@ -67,6 +84,17 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                    {
+                                        isLoading ? <div className="flex justify-center	items-center absolute z-10 inset-0 bg-zinc-500 bg-opacity-10">
+                                            <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-black"
+                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                                        strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor"
+                                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                        </div> : <div></div>
+                                    }
                                     <Dialog.Title
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
@@ -85,6 +113,21 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
                                                 onChange={(e)=> {currProfRef.current.name = e.target.value}}
                                             />
                                         </label>
+                                        {/* Select Profile Photo */}
+                                        <div className="block mb-4">
+                                            <span className="text-gray-700">Change Profile Photo</span>
+                                            <div className="flex mt-2 gap-4 flex-wrap">
+                                                <label className="relative cursor-pointer w-[80px] h-[80px] border-brand border-2 rounded-md flex justify-center items-center shrink-0">
+                                                    <input className="absolute inset-0 z-10 invisible" type="file" onChange={(e)=>handleFileUpload(e.target.files)} accept="image/*" />
+                                                    <FontAwesomeIcon icon={faFileUpload} className="text-4xl text-brand" />
+                                                </label>
+
+                                                <div className={"w-[80px] h-[80px] border-brand rounded-md flex justify-center items-center shrink-0 relative border-0" }>                                                            
+                                                    <Image  src={selectedImage} alt='' fill className="rounded-md" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                         {/* Enter email */}
                                         <label className="block mb-4">
                                             <span className="text-gray-700">Email</span>
