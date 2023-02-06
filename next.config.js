@@ -1,14 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites(){
-  	return [
-  	  {
-        "source": "/privacy-policy",
-        "destination": "https://www.privacypolicygenerator.info/live.php?token=HfAe2UeBPskqLjcn5EaOgT3Ki0s1fIG5"
-  	  }
-  	]
-  },
   images: {
     remotePatterns: [
       {
