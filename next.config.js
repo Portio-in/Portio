@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async rewrites(){
+  	return [
+  	  {
+        "source": "/privacy-policy",
+        "destination": "/html/privacy.html"
+  	  }
+  	]
+  },
   images: {
     remotePatterns: [
       {
