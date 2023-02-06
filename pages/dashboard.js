@@ -12,7 +12,7 @@ import {getCookies} from "cookies-next";
 import {useEffect} from "react";
 import GlobalController from "../controllers/controller";
 
-export default function dashbaord({token}) {
+export default function Dashbaord({token}) {
     useEffect(()=>{
         const controller = GlobalController.getInstance();
         controller.apiClient.setToken(token);
