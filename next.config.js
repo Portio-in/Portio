@@ -5,7 +5,7 @@ const nextConfig = {
   	return [
   	  {
         "source": "/privacy-policy",
-        "destination": "/html/privacy.html"
+        "destination": "https://www.privacypolicygenerator.info/live.php?token=HfAe2UeBPskqLjcn5EaOgT3Ki0s1fIG5"
   	  }
   	]
   },
