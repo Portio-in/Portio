@@ -154,7 +154,7 @@ export default function AddEditProjectRecordModal({ isOpen, isEdit, currentProje
 
                                                 {
                                                     selectedImages.map((image, index) => {
-                                                        return <div className={"w-[80px] h-[80px] border-brand rounded-md flex justify-center items-center shrink-0 relative " + (image===coverImageUrl ? "border-2" : "border-0")} onClick={()=>selectCoverImage(image)}>
+                                                        return <div className={"w-[80px] h-[80px] border-brand rounded-md flex justify-center items-center shrink-0 relative " + (image===coverImageUrl ? "border-2" : "border-0")} key={index} onClick={()=>selectCoverImage(image)}>
                                                             <div className="absolute top-[-8px] right-[-8px] cursor-pointer bg-red-500 w-5 h-5 z-10 rounded-full flex justify-center items-center" onClick={()=>removeImage(image)}>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#fff" className="w-4 h-4">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -184,7 +184,7 @@ export default function AddEditProjectRecordModal({ isOpen, isEdit, currentProje
                                         <div className="w-full flex flex-row flex-wrap">
                                             {
                                                 selectedTechStacks.map((ele)=>
-                                                    <div className="flex justify-center items-center m-1 font-medium py-2 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 stretch-0 w-fit">
+                                                    <div key={ele.id} className="flex justify-center items-center m-1 font-medium py-2 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 stretch-0 w-fit">
                                                         <div className="text-base font-normal leading-none max-w-full">{ele.name} </div>
                                                         <div className="flex flex-auto flex-row-reverse" onClick={() => removeTechStack(ele.id)}>
                                                             <div>
