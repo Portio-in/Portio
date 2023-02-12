@@ -40,7 +40,7 @@ function HomePage({loggedIn}) {
                 {
                     !loggedIn ?
                         <>
-                            <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} />
+                            {/* <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} /> */}
                             <OAuthButton icon={githubIcon} label="Continue with Github" onClick={initGithubOAuth} />
                         </>
                         : <OAuthButton icon={buildIcon} label="Start Building Portfolio" onClick={goToDashboard} />
