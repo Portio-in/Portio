@@ -51,6 +51,18 @@ function HomePage({loggedIn}) {
                 <p>created by Team Portio with ❤️</p>
             </div>
         </div>
+        <footer class="bg-gray-900 text-white w-[100vw] md:w-full md:static absolute bottom-0 inset-x-0">
+          <div class="w-full p-4">
+            <div className="w-[100vw] text-center md:w-fit md:text-left md:inline">
+              © 2023 Copyright: 
+              <a class="text-whitehite" href="https://portio.in/"> PORTIO</a>      
+            </div>    
+            <div className="w-[100vw] text-center md:w-fit md:text-right md:inline">
+              <a class="text-whitehite md:float-right" href="https://portio.in/terms-and-condition/"> Terms and Conditions</a>
+              <a class="text-whitehite md:float-right md:px-4" href="https://portio.in/privacy-policy/"> Privacy Policy</a>
+            </div>  
+          </div>
+        </footer>
     </>
   )
 }

@@ -48,10 +48,10 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
 
     async function handleFileUpload(files){
         setIsLoading(true);
-        const res = await GlobalController.getInstance().apiClient.uploadFiles(files);
+        const res = await GlobalController.getInstance().apiClient.uploadFile(files[0]);
         if(res.success){
-            currProfRef.current.avatar = res.links[0];
-            setSelectedImage( res.links[0] );
+            currProfRef.current.avatar = res.link;
+            setSelectedImage( res.link );
         }
         setIsLoading(false);
     }
