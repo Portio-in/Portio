@@ -58,11 +58,16 @@ export default function AddEditProjectRecordModal({ isOpen, isEdit, currentProje
 
     async function handleFileUpload(files){
         setIsLoading(true);
-        const res = await GlobalController.getInstance().apiClient.uploadFiles(files);
-        if(res.success){
-            projectRef.current.images = res.links;
-            setSelectedImages([...selectedImages, ...res.links]);
-        }
+        let temp = []
+        for (let idx = 0; idx < files.length; idx++) {
+            const file = files[idx];
+            const res = await GlobalController.getInstance().apiClient.uploadImage(file, 512);
+            if(res.success){
+                projectRef.current.images = res.link;
+                temp.push(res.link);
+            }                
+        }  
+        setSelectedImages([...selectedImages, ...temp]);      
         setIsLoading(false);
     }
 

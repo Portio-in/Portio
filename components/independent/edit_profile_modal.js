@@ -48,7 +48,7 @@ export default function EditProfileModal({ profileRef, isOpen, onClickCloseModal
 
     async function handleFileUpload(files){
         setIsLoading(true);
-        const res = await GlobalController.getInstance().apiClient.uploadFile(files[0]);
+        const res = await GlobalController.getInstance().apiClient.uploadImage(files[0], 256);
         if(res.success){
             currProfRef.current.avatar = res.link;
             setSelectedImage( res.link );

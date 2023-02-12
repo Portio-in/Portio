@@ -33,6 +33,12 @@ const nextConfig = {
         port: "",
         pathname: '/**',
       },
+      {
+        protocol: "https",
+        hostname: "portio-content.s3.ap-south-1.amazonaws.com",
+        port: "",
+        pathname: '/**',
+      },
     ]
   }
 }

@@ -60,59 +60,43 @@ class ApiClient{
     }
 
 
-    async uploadFiles(files){
+    async uploadFile(file){
         let data = new FormData();
-        for(let file of files){
-            data.append('files', file);
-        }
+        data.append('file', file);
         const config = {
             method: 'post',
-            url: `${BASE_FILE_MANAGEMENT_URL}/upload`,
-            headers: {
-                'Authorization': ApiClient.#token
-            },
+            url: `${BASE_FILE_MANAGEMENT_URL}/upload/file`,
             data : data
         }
         try{
             let res = await ApiClient.axiosClient(config);
-            let data = res.data;
-            let files = data.files;
-            if(files === undefined || files === null || files.length === 0) {
-                throw new Error("Upload failed");
-            }
+            let fileLink = res.data;
             return {
                 success: true,
-                links: files
+                link: fileLink
             };
         }catch (e) {
             return {
                 success: false,
-                links: []
+                link: ""
             }
         }
     }
 
-    async uploadFile(file){
+    async uploadImage(file, width){
         let data = new FormData();
-        data.append('files', file);
+        data.append('file', file);
         const config = {
             method: 'post',
-            url: `${BASE_FILE_MANAGEMENT_URL}/upload`,
-            headers: {
-                'Authorization': ApiClient.#token
-            },
+            url: `${BASE_FILE_MANAGEMENT_URL}/upload/image/` + (width ? `?width=${width}` : ""),
             data : data
         }
         try{
             let res = await ApiClient.axiosClient(config);
-            let data = res.data;
-            let files = data.files;
-            if(files === undefined || files === null || files.length === 0) {
-                throw new Error("Upload failed");
-            }
+            let imgLink = res.data;
             return {
                 success: true,
-                link: files[0]
+                link: imgLink
             };
         }catch (e) {
             return {
