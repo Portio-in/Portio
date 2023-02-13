@@ -51,7 +51,13 @@ export async function getServerSideProps(context) {
     const cookies = getCookies({ req });
     let token = '';
     if(!cookies.token ){
-        res.redirect("/");
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/",
+            },
+            props:{},
+        }
     }
 
     token = cookies.token;
