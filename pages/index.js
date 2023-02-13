@@ -13,6 +13,8 @@ function HomePage({loggedIn}) {
 
   const router = useRouter();
   function initGoogleOAuth() {
+      alert("Login with Google is coming soon. Please use Github to login.")
+      return;
       window.location.href = GOOGLE_OAUTH_URL;
   }
 
@@ -40,7 +42,7 @@ function HomePage({loggedIn}) {
                 {
                     !loggedIn ?
                         <>
-                            {/* <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} /> */}
+                            <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} />
                             <OAuthButton icon={githubIcon} label="Continue with Github" onClick={initGithubOAuth} />
                         </>
                         : <OAuthButton icon={buildIcon} label="Start Building Portfolio" onClick={goToDashboard} />
