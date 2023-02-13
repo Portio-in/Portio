@@ -13,7 +13,7 @@ function MenuBar() {
     const [isDomainConfigureModalOpen, setIsDomainConfigureModalOpen] = useState(false)
     const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
     const profile = useRef(Profile.empty());
-    const [avatar, setAvatar] = useState("https://personalprojectts.s3.ap-south-1.amazonaws.com/167457283523936ed847c2ae62dfb3e47c5316166afb9.jpg");
+    const [avatar, setAvatar] = useState("https://portio-content.s3.ap-south-1.amazonaws.com/167631382200540418cd29fad71aa0a11ddfdcb192c4f.png");
 
     const openDomainConfigureModal = () => {
         GlobalController.fetchProfile()
