@@ -1,38 +1,30 @@
+## Portio - Your one stop destination to build portfolio website
+Portio is an open source platform which allow anyone to create their portfolio and manage it efficiently and allow to switch between different themes anytime.
+![2](https://user-images.githubusercontent.com/57363826/218558573-9f961526-d803-4006-91d0-d4835c582a09.png)
+
+## Netlify Build Status
 [![Netlify Status](https://api.netlify.com/api/v1/badges/749c113e-167c-400c-a9ae-49a125728b85/deploy-status)](https://app.netlify.com/sites/portio-prod/deploys)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Different section of Portio
+| Repository | Description | Tech Stack |
+|----------|-------|------|
+| [Portio-in/Portio](https://github.com/Portio-in/Portio) | Frontend  | NextJS |
+| [Portio-in/backend](https://github.com/Portio-in/backend) | Backend | NodeJS + ExpressJS + Prisma ORM |
+| [Portio-in/file-uploader](https://github.com/Portio-in/file-uploader) | File uploader to S3 with Image Resizer | ExpressJS + Multer + sharp |
+| [Portio-in/template_serving_engine](https://github.com/Portio-in/template_serving_engine) | Serve compiled templates for each Subdomain from S3 with Inbuilt cahce | ExpressJS + Memcached + S3 |
+| [Portio-in/template-compiler](https://github.com/Portio-in/template-compiler) | Microservice to compile template and store in S3 as per request. It depends on RabbitMQ as Message Broker | Python + Jinja Template Engine + RabbitMQ |
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Community
+We would love to hear from you! We communicate on Discord:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![](https://dcbadge.vercel.app/api/server/HDJ7HfAZVw)](https://discord.gg/HDJ7HfAZVw)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Thanks to our contributor 
+<a href="https://github.com/Portio-in/Portio/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Portio-in/Portio" />
+</a>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Support Us
+If you have liked the concept and niche of Portio, support us by giving ⭐ to this repo.
