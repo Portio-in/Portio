@@ -1,4 +1,4 @@
-import { faFacebookF, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faBloggerB, faDiscord, faFacebookF, faGithub, faGitlab, faHashnode, faLinkedin, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import {useEffect, useRef, useState} from "react";
 import toast from 'react-hot-toast';
 import AddEditSocialLinkModal from "./independent/add_edit_social_link_modal";
@@ -6,7 +6,7 @@ import AddSocialLinkOption from "./independent/add_social_link_option";
 import EditDeleteChoiceModal from "./independent/edit_delete_choice_modal";
 import SocialLinkOption from "./independent/social_link_option";
 import GlobalController from "../controllers/controller";
-import {faLink} from "@fortawesome/free-solid-svg-icons";
+import {faCode, faLink, faPaperclip} from "@fortawesome/free-solid-svg-icons";
 
 function SocialLinkBar() {
     const controller = GlobalController.getInstance().socialLinkController;
@@ -80,11 +80,32 @@ function SocialLinkBar() {
                         <SocialLinkOption
                             key={ele.id}
                             label={ele.type.getTitle()}
-                            icon={ele.type.type === "facebook" ? faFacebookF :
-                                ele.type.type === "github" ? faGithub : faLink}
+                            icon={
+                                ele.type.type === "facebook" ? faFacebookF :
+                                ele.type.type === "github" ? faGithub : 
+                                ele.type.type === "gitlab" ? faGitlab : 
+                                ele.type.type === "twitter" ? faTwitter : 
+                                ele.type.type === "linkedin" ? faLinkedin : 
+                                ele.type.type === "hashnode" ? faHashnode : 
+                                ele.type.type === "devto" ? faCode : 
+                                ele.type.type === "blogger" ? faBloggerB : 
+                                ele.type.type === "discord" ? faDiscord : 
+                                ele.type.type === "youtube" ? faYoutube : 
+                                ele.type.type === "other" ? faPaperclip : 
+                                faLink}
                             color={
                                 ele.type.type === "facebook" ? "#3F72E5" :
-                                ele.type.type === "github" ? "#161B23" : "#cc6b2c"
+                                ele.type.type === "github" ? "#161B23" : 
+                                ele.type.type === "gitlab" ? "#E24329" : 
+                                ele.type.type === "twitter" ? "#1D9BF0" : 
+                                ele.type.type === "linkedin" ? "#0A66C2" : 
+                                ele.type.type === "hashnode" ? "#2962FF" : 
+                                ele.type.type === "devto" ? "#000000" : 
+                                ele.type.type === "blogger" ? "#F06A35" : 
+                                ele.type.type === "discord" ? "#5865F2" : 
+                                ele.type.type === "youtube" ? "#FF0000" : 
+                                ele.type.type === "other" ? "#cc6b2c" : 
+                                "#cc6b2c"
                             }
                             onClick={()=>{
                                 currentRecord.current = ele;
