@@ -2,7 +2,9 @@
 Portio is an open source platform which allow anyone to create their portfolio and manage it efficiently and allow to switch between different themes anytime.
 ![2](https://user-images.githubusercontent.com/57363826/218558573-9f961526-d803-4006-91d0-d4835c582a09.png)
 
-## Netlify Build Status
+## Access Portio and Create Portfolio
+Visit [portio.in/](http://portio.in/) to explore and create your favourite portfolio website.
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/749c113e-167c-400c-a9ae-49a125728b85/deploy-status)](https://app.netlify.com/sites/portio-prod/deploys)
 
 
