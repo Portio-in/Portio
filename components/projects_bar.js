@@ -103,7 +103,11 @@ function ProjectsBar() {
                 deleteLabel="Delete Project Record"
                 onClickEdit={()=>{
                     setIsEditProjectModal(true);
-                    setIsOpenNewProjectModal(true);
+                    setTimeout(()=>{
+                        setIsOpenEditDeleteProjectModal(false);
+                        setTimeout(()=>setIsOpenNewProjectModal(true), 100);
+                    }, 100);
+                    // setIsOpenNewProjectModal(true);
                 }}
                 onClickDelete={()=>{
                     deleteProject(currentRecord.current);
