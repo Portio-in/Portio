@@ -11,9 +11,7 @@ class AuthController {
     }
 
     async login(email){
-        console.log(email);
         const res = await this.apiClient.request('POST', LOGIN_EMAIL_ROUTE, { email: email });
-        console.log(res);
         if(res.success) {
             return {
                 success: res.data.success,
@@ -22,12 +20,18 @@ class AuthController {
         }else {
             return {
                 success: false,
-                message: "Unexpected Error"
+                message: res.message
             };
         }
     }
 
     async signup(email, name){
+        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) == false){
+            return {
+                success: false,
+                message: "Email is invalid"
+            };
+        }
         const res = await this.apiClient.request('POST', SIGNUP_EMAIL_ROUTE, { email: email, name: name });
         if(res.success) {
             return {

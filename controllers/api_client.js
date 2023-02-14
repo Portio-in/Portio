@@ -30,7 +30,7 @@ class ApiClient{
             }
         }
         while (true){
-            if(!route.startsWith("/available") && ApiClient.#token === ""){
+            if(!(route.startsWith("/available") || route.startsWith("/auth")) && ApiClient.#token === ""){
                 await new Promise((resolve) => setTimeout(resolve, 10));
             }else break;
         }

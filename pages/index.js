@@ -1,6 +1,7 @@
 import Image from "next/image";
 import logo from "../assets/img/logo.png";
 import googleIcon from "../assets/img/google-icon.png";
+import mailIcon from "../assets/img/mail-icon.png";
 import githubIcon from "../assets/img/github-icon.png";
 import buildIcon from "../assets/img/build-icon.png";
 import OAuthButton from "../components/independent/oauth_btn";
@@ -11,6 +12,7 @@ import {Head} from "next/head";
 import {useState, useRef} from "react";
 import LoginSignupChoiceModal from "../components/independent/login_signup_choice_modal";
 import LoginSignupModal from "../components/independent/login_signup_modal";
+import AlertModal from "../components/independent/alert_modal";
 import GlobalController from "../controllers/controller";
 
 function HomePage({loggedIn}) {
@@ -21,6 +23,9 @@ function HomePage({loggedIn}) {
   const [isOpenLoginSignupChoiceModal, setIsOpenLoginSignupChoiceModal] = useState(false);
   const [isOpenLoginSignupModal, setIsOpenLoginSignupModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [isOpenAlertModal, setIsOpenAlertModal] = useState(false);
+  const [alertModalTitle, setAlertModalTitle] = useState("");
+  const [alertModalDescription, setAlertModalDescription] = useState("");
   
   function initGoogleOAuth() {
       alert("Login with Google is coming soon. Please use Github to login.")
@@ -37,17 +42,24 @@ function HomePage({loggedIn}) {
   }
 
   function handleLogin() {
-    console.log(loginRef)
-    console.log(controller)
-    console.log(controller.login)
     controller.login(loginRef.current.email).then(res => {
-      console.log("LOGIN", res);
+        setIsOpenLoginSignupModal(false);
+        setAlertModalTitle(res.success ? "Magic Link Sent" : "Login Failed");
+        setAlertModalDescription(res.message);
+        setTimeout(() => {
+           setIsOpenAlertModal(true);
+        }, 100)
     })
   }
 
   function handleSignup() {
-    controller.login(loginRef.current.email, loginRef.current.name).then(res => {
-      console.log("SIGNUP", res);
+    controller.signup(loginRef.current.email, loginRef.current.name).then(res => {
+        setIsOpenLoginSignupModal(false);
+        setAlertModalTitle(res.success ? "Registration Successful" : "Registration Failed");
+        setAlertModalDescription(res.message);
+        setTimeout(() => {
+            setIsOpenAlertModal(true);
+        }, 100)
     })
   }
 
@@ -68,7 +80,7 @@ function HomePage({loggedIn}) {
                     !loggedIn ?
                         <>
                             {/* <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} /> */}
-                            <OAuthButton  icon={googleIcon} label="Continue with Email" onClick={()=>{setIsOpenLoginSignupChoiceModal(true)}} />
+                            <OAuthButton icon={mailIcon}   label="Continue with Email&nbsp;" onClick={()=>{setIsOpenLoginSignupChoiceModal(true)}} />
                             <OAuthButton icon={githubIcon} label="Continue with Github" onClick={initGithubOAuth} />
                         </>
                         : <OAuthButton icon={buildIcon} label="Start Building Portfolio" onClick={goToDashboard} />
@@ -95,9 +107,7 @@ function HomePage({loggedIn}) {
           isOpen={isOpenLoginSignupModal} 
           onClickCloseModal={()=>setIsOpenLoginSignupModal(false)}           
           onClickSubmit={(_)=>{
-            console.log("SUBMIT")
-            handleLogin()
-            // isLogin ? handleLogin() : handleSignup();
+            isLogin ? handleLogin() : handleSignup();
           }}
           isLogin={isLogin}
           loginRef={loginRef}
@@ -120,7 +130,12 @@ function HomePage({loggedIn}) {
             }, 100);
           }}
         />
-
+        <AlertModal
+            title={alertModalTitle}
+            description={alertModalDescription}
+            isOpen={isOpenAlertModal}
+            onClickCloseModal={()=>setIsOpenAlertModal(false)}
+        />
     </>
   )
 }
