@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "../assets/img/logo.png";
-import googleIcon from "../assets/img/google-icon.png";
+// import googleIcon from "../assets/img/google-icon.png";
 import mailIcon from "../assets/img/mail-icon.png";
 import githubIcon from "../assets/img/github-icon.png";
 import buildIcon from "../assets/img/build-icon.png";
