@@ -85,11 +85,11 @@ function MenuBar() {
     return (
         <>
             <div className="flex flex-row flex-nowrap gap-x-4 md:gap-x-8 overflow-x-auto mt-6 md:mt-10">
+                <MenuBarOption icon={copyPortfolioIcon} label="Open Portfolio" onclick={openPortfolioLinkToNewTab}/>
+                <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" onclick={copyPortfolioLinkToClipboard}/>
                 <MenuBarOption icon={avatar} label="Edit Profile" onclick={openProfileConfigureModal} />
                 <MenuBarOption icon={domainManageIcon} label="Update Domain" onclick={openDomainConfigureModal} />
                 {/*<MenuBarOption icon={uploadResumeIcon} label="Upload Resume" />*/}
-                <MenuBarOption icon={copyPortfolioIcon} label="Copy Portfolio" onclick={copyPortfolioLinkToClipboard}/>
-                <MenuBarOption icon={copyPortfolioIcon} label="Open Portfolio" onclick={openPortfolioLinkToNewTab}/>
             </div>
 
             <DomainConfigureModal profileRef={profile} isOpen={isDomainConfigureModalOpen} onClickCloseModal={()=>setIsDomainConfigureModalOpen(false)} onClickUpdate={updateDomain} />
