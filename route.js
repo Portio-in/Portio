@@ -35,5 +35,7 @@ module.exports = {
     "FETCH_ALL_EXPERIENCE_ROUTE": "/experience/all",
     "UPDATE_EXPERIENCE_ROUTE": "/experience",
     "DELETE_EXPERIENCE_ROUTE": "/experience",
-    "CREATE_EXPERIENCE_ROUTE": "/experience"
+    "CREATE_EXPERIENCE_ROUTE": "/experience",
+    "LOGIN_EMAIL_ROUTE": "/auth/email/login",
+    "SIGNUP_EMAIL_ROUTE": "/auth/email/init",
 }

@@ -8,10 +8,20 @@ import { GITHUB_OAUTH_URL, GOOGLE_OAUTH_URL } from "../config";
 import { getCookies} from 'cookies-next';
 import { useRouter } from "next/router";
 import {Head} from "next/head";
+import {useState, useRef} from "react";
+import LoginSignupChoiceModal from "../components/independent/login_signup_choice_modal";
+import LoginSignupModal from "../components/independent/login_signup_modal";
+import GlobalController from "../controllers/controller";
 
 function HomePage({loggedIn}) {
 
   const router = useRouter();
+  const loginRef = useRef({});
+  const controller = GlobalController.getInstance().authController;
+  const [isOpenLoginSignupChoiceModal, setIsOpenLoginSignupChoiceModal] = useState(false);
+  const [isOpenLoginSignupModal, setIsOpenLoginSignupModal] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  
   function initGoogleOAuth() {
       alert("Login with Google is coming soon. Please use Github to login.")
       return;
@@ -24,6 +34,21 @@ function HomePage({loggedIn}) {
 
   function goToDashboard() {
     router.push("/dashboard");
+  }
+
+  function handleLogin() {
+    console.log(loginRef)
+    console.log(controller)
+    console.log(controller.login)
+    controller.login(loginRef.current.email).then(res => {
+      console.log("LOGIN", res);
+    })
+  }
+
+  function handleSignup() {
+    controller.login(loginRef.current.email, loginRef.current.name).then(res => {
+      console.log("SIGNUP", res);
+    })
   }
 
 
@@ -42,7 +67,8 @@ function HomePage({loggedIn}) {
                 {
                     !loggedIn ?
                         <>
-                            <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} />
+                            {/* <OAuthButton  icon={googleIcon} label="Continue with Google" onClick={initGoogleOAuth} /> */}
+                            <OAuthButton  icon={googleIcon} label="Continue with Email" onClick={()=>{setIsOpenLoginSignupChoiceModal(true)}} />
                             <OAuthButton icon={githubIcon} label="Continue with Github" onClick={initGithubOAuth} />
                         </>
                         : <OAuthButton icon={buildIcon} label="Start Building Portfolio" onClick={goToDashboard} />
@@ -65,6 +91,36 @@ function HomePage({loggedIn}) {
             </div>  
           </div>
         </footer> */}
+        <LoginSignupModal
+          isOpen={isOpenLoginSignupModal} 
+          onClickCloseModal={()=>setIsOpenLoginSignupModal(false)}           
+          onClickSubmit={(_)=>{
+            console.log("SUBMIT")
+            handleLogin()
+            // isLogin ? handleLogin() : handleSignup();
+          }}
+          isLogin={isLogin}
+          loginRef={loginRef}
+        />
+        <LoginSignupChoiceModal
+          isOpen={isOpenLoginSignupChoiceModal} 
+          onClickCloseModal={()=>setIsOpenLoginSignupChoiceModal(false)} 
+          onClickLogin={()=>{
+            setIsOpenLoginSignupChoiceModal(false);
+            setIsLogin(true);
+            setTimeout(() => {              
+              setIsOpenLoginSignupModal(true);
+            }, 100);
+          }}
+          onClickSignup={()=>{
+            setIsOpenLoginSignupChoiceModal(false);
+            setIsLogin(false);
+            setTimeout(() => {              
+              setIsOpenLoginSignupModal(true);
+            }, 100);
+          }}
+        />
+
     </>
   )
 }

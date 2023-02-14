@@ -7,6 +7,7 @@ import SocialLinkController from "./social_link";
 import ProfileController from "./profile";
 import ProjectController from "./project";
 import ExperienceController from "./experience";
+import AuthController from "./auth";
 
 
 class GlobalController{
@@ -26,6 +27,7 @@ class GlobalController{
         this.profileController = new ProfileController(this.apiClient);
         this.projectController = new ProjectController(this.apiClient);
         this.experienceController = new ExperienceController(this.apiClient);
+        this.authController = new AuthController(this.apiClient);        
     }
 
     static async fetchProfile(ignore_cache = false){
