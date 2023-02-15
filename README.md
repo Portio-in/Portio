@@ -28,5 +28,9 @@ We would love to hear from you! We communicate on Discord:
   <img src="https://contrib.rocks/image?repo=Portio-in/Portio" />
 </a>
 
+## Authors
+- Tanmoy Sarkar ([@Tanmoy741127](https://github.com/Tanmoy741127/))
+- Amartya Chakraborty ([@cAmartya](https://github.com/cAmartya/))
+
 ## Support Us
 If you have liked the concept and niche of Portio, support us by giving ⭐ to this repo.
